@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "snapprice-app",
+    "name": "Snap Price",
     "slug": "snapprice-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "snapprice.mindsgn.studio",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
