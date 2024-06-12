@@ -9,6 +9,7 @@ interface UserInterface {
   setPage: (page: number) => void;
   setData: (data: any) => void;
   setLoading: (loading: any) => void;
+  getSearch: () => void;
 }
 
 export const UserContext = React.createContext<UserInterface>({
@@ -20,6 +21,7 @@ export const UserContext = React.createContext<UserInterface>({
   setPage:(page: number) => {},
   setData: (data: any) => {},
   setLoading: (loading: boolean) => {},
+  getSearch: () => {},
 });
 
 export const useUser = () => React.useContext(UserContext);
@@ -27,30 +29,13 @@ export const useUser = () => React.useContext(UserContext);
 export const UserProvider = ({ children }: { children: any }) => {
     const [search, setSearch] = useState<string>("");
     const [page, setPage] = useState<number>(1);
-    const [data, setData] = useState<null | any[]>([
-        {
-            id:"1234",
-            title: "xbox One",
-            image: "",   
-        },
-        {
-            id:"12",
-            title: "xbox One",
-            image: "",
-            
-        },
-        {
-            id:"122",
-            title: "xbox One",
-            image: "",
-            
-        }
-    ]);
+    const [data, setData] = useState<null | any[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const getSearch = async (search: string | null) => {
+    const getSearch = async () => {
         try{
           if (page == 1) {
+            setData([]);
             setLoading(true);
           }
           
@@ -61,7 +46,7 @@ export const UserProvider = ({ children }: { children: any }) => {
             const responseData = await response.json();
       
             const { items } = responseData;
-            console.log(items)
+            console.log(items[0])
             if(items){
               setData((prevData: any) => [...prevData, ...items]);
             }
@@ -87,7 +72,8 @@ export const UserProvider = ({ children }: { children: any }) => {
             setSearch,
             setPage,
             setData,
-            setLoading
+            setLoading,
+            getSearch
         }}
         >
         {children}

@@ -3,13 +3,17 @@ import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import { useUser } from '@/context';
 
 export default function SearchInput() {
-    const {} = useUser()
+    const {setSearch, getSearch} = useUser()
 
     return (
         <View style={styles.view}>
-            <TextInput style={styles.textInput}
-                placeholder='Search any item'/>        
-            <Button title={"Search"}/>
+            <TextInput 
+                style={styles.textInput}
+                placeholder='Search any item'
+                onChangeText={(text) => {setSearch(text)}}
+                />        
+            <Button title={"Search"}
+            onPress={() => getSearch()}/>
         </View>
     );
 }

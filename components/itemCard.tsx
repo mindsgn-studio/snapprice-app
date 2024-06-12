@@ -14,20 +14,22 @@ export default function ItemCard(
         title,
         image,
         price,
-        id,
     }: ItemCard
 ) {
-    const {} = useUser()
-
     return (
         <View style={styles.view}>
             <Image
                 style={styles.image}
                 source={{
-                uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg==',
+                uri: `${image}`,
             }} />
             <View>
-                <Text>{title}</Text>
+                <Text  
+                    style={{
+                        width: 150
+                    }}
+                    numberOfLines={1}
+                    ellipsizeMode={"tail"}>{title}</Text>
                 <Text>{price}</Text>
             </View>
         </View>
