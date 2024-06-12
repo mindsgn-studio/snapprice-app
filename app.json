@@ -2,7 +2,7 @@
   "expo": {
     "name": "Snap Price",
     "slug": "snapprice-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "snapprice.mindsgn.studio",
@@ -10,15 +10,16 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#f4511e"
     },
     "ios": {
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 2, 
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#f4511e"
       },
       "package": "price.mindsgn.studio"
     },

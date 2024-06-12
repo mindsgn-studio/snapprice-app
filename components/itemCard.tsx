@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, View, Text, Image, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Text, Image, TextInput, Button, TouchableOpacity } from 'react-native';
 import { useUser } from '@/context';
 
 type ItemCard = {
@@ -17,7 +17,7 @@ export default function ItemCard(
     }: ItemCard
 ) {
     return (
-        <View style={styles.view}>
+        <TouchableOpacity style={styles.view}>
             <Image
                 style={styles.image}
                 source={{
@@ -30,14 +30,15 @@ export default function ItemCard(
                     }}
                     numberOfLines={1}
                     ellipsizeMode={"tail"}>{title}</Text>
-                <Text>{price}</Text>
+                <Text style={styles.textPrice}>{price}</Text>
             </View>
-        </View>
+        </TouchableOpacity>
     );
 }
 
 const styles = StyleSheet.create({
     view: {
+        flex: 1,
         marginTop: 10,
         minWidth: "90%",
         padding: 10,
@@ -50,5 +51,9 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         marginHorizontal: 10,
+    },
+    textPrice:{
+        fontSize:20,
+        fontWeight:'bold'
     }
 });

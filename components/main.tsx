@@ -7,8 +7,11 @@ export default function Main() {
     const { data } = useUser()
 
     return (
-        <ScrollView style={styles.view}>
+        <View style={styles.view}>
             <FlashList
+                style={{
+                    flex: 1,
+                }}
                 data={data}
                 renderItem={({ item }: any) => <ItemCard 
                 id={item.id} 
@@ -17,12 +20,14 @@ export default function Main() {
                 price={item.Price} />}
                 estimatedItemSize={100}
             />
-        </ScrollView>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
     view: {
+        marginTop: 10,
         flex: 1,
+        width: "90%",
     },
 });
