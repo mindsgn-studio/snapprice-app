@@ -1,20 +1,19 @@
-import { StyleSheet, View, Text } from 'react-native';
-import { SearchInput, Main } from '@/components';
+import { View, StyleSheet } from 'react-native';
+import { width, height } from '@/@src/constants/dimensions';
+import SearchInput from '@/@src/components/search';
 
-export default function App() {
+export default function HomeScreen() {
   return (
-    <View style={styles.View}>
+    <View style={styles.container}>
       <SearchInput />
-      <Main />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  View:{
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#2B4EF5",
-    paddingVertical: 10,
-  },
+    container:{
+      backgroundColor: "blue",
+      width,
+      height
+    }
 });

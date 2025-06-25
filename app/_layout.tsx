@@ -1,23 +1,32 @@
-import { UserProvider } from '@/context';
 import { Stack } from 'expo-router';
+import { createStore } from 'tinybase';
+import * as SQLite from 'expo-sqlite';
+import { createExpoSqlitePersister } from 'tinybase/persisters/persister-expo-sqlite';
+import {
+  Provider,
+  useCreatePersister,
+  useCreateStore,
+} from 'tinybase/ui-react';
+import 'react-native-reanimated';
+import { DATABASE } from '@/@src/constants/database';
+
+const useAndStartPersister = (store: any) =>
+  useCreatePersister(
+    store,
+    (store) => createExpoSqlitePersister(store, SQLite.openDatabaseSync(DATABASE)),
+    [],
+    (persister) => persister.load().then(persister.startAutoSave)
+);
 
 export default function RootLayout() {
+  const store = useCreateStore(createStore);
+  useAndStartPersister(store);
+
   return (
-    <UserProvider>
-        <Stack
-            screenOptions={{
-                headerStyle: {
-                backgroundColor: '#f4511e',
-            },
-            headerShown: false,
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
-        }}>
-      <Stack.Screen name="index" />
-      <Stack.Screen name="item" />
-    </Stack>
-    </UserProvider>
+    <Provider store={store}>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+      </Stack>
+    </Provider>
   );
 }
