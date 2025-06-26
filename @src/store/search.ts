@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 
 interface Search {
+    id: string,
     title: string
 }
 

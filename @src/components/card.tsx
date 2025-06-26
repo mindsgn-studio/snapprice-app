@@ -56,7 +56,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: "white",
         display: "flex",
-        flexDirection: "row"
+        flexDirection: "row",
+        marginHorizontal: 20,
     },
     image: {
         width: 50,

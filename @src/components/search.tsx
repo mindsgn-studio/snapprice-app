@@ -7,7 +7,8 @@ export default function SearchInput() {
     const [ searchText, setsearchText ] = useState("sony")
 
     const search = async() => {
-         clearSearch()
+        if (searchText ==="") return 
+        clearSearch()
         try {
             const response = await fetch(`https://api.takealot.com/rest/v-1-14-0/searches/products,filters,facets,sort_options,breadcrumbs,slots_audience,context,seo,layout?r=1&sb=1&si=16f505529571cecf83dcabb18c4118b6&qsearch=${searchText}&via=suggestions&searchbox=true&offer_opt=true`)
             const data = await response.json()
@@ -19,8 +20,8 @@ export default function SearchInput() {
                 const {product_views} = data;
                 const { core /*, gallery*/ } = product_views;
                 // const { images } = gallery;
-                const { title /*, slug, subtitle, brand*/ } = core;
-                setSearch({title});
+                const { title, id /*, slug, subtitle, brand*/ } = core;
+                setSearch({title, id});
             })
         }catch{
             clearSearch()
