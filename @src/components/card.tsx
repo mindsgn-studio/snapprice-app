@@ -2,9 +2,9 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
 type ItemCard = {
     title: string,
-    image: string,
-    price: number,
-    id: string,
+    image?: string,
+    price?: number,
+    id?: string,
 }
 
 export default function ItemCard(
@@ -14,21 +14,34 @@ export default function ItemCard(
         price,
     }: ItemCard
 ) {
+    console.log(title)
+
     return (
         <TouchableOpacity style={styles.view}>
-            <Image
+            {
+                /*
+                <Image
                 style={styles.image}
                 source={{
                 uri: `${image}`,
             }} />
+                */
+            }
+            
             <View>
                 <Text  
                     style={{
-                        width: 150
+                        width: 150,
+                        color: "black"
                     }}
                     numberOfLines={1}
                     ellipsizeMode={"tail"}>{title}</Text>
-                <Text style={styles.textPrice}>{price}</Text>
+                    {
+                        /*
+                         <Text style={styles.textPrice}>{price}</Text>
+                        */
+                    }
+               
             </View>
         </TouchableOpacity>
     );

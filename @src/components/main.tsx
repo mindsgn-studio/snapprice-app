@@ -1,24 +1,24 @@
 import { StyleSheet, View, ScrollView } from 'react-native';
 import ItemCard from '@/@src/components/card';
 import { FlashList } from "@shopify/flash-list";
-import { useSortedRowIds } from "tinybase/ui-react"
-import { TABLES } from '@/@src/constants/database';
+import { useSearch } from '../store/search';
+
+interface Search {
+    title: string
+}
 
 export default function Main() {
-    const data = useSortedRowIds(TABLES.items)
+    const { search } = useSearch();
+    console.log(search);
     
     return (
         <View style={styles.view}>
             <FlashList
-                style={{
-                    flex: 1,
-                }}
-                data={data}
+                data={search}
                 renderItem={({ item }: any) => <ItemCard 
-                id={item.id} 
-                title={item.Title} 
-                image={item.Images[0]} 
-                price={item.Price} />}
+                    id={item.id} 
+                    title={item.title} />
+                }
                 estimatedItemSize={100}
             />
         </View>
@@ -30,5 +30,6 @@ const styles = StyleSheet.create({
         marginTop: 10,
         flex: 1,
         width: "90%",
+        alignSelf: "center"
     },
 });
