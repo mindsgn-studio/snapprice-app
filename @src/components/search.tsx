@@ -1,13 +1,45 @@
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, Button } from 'react-native';
+import { useSearch } from '../store/search';
 
 export default function SearchInput() {
+    const { setSearch, clearSearch } = useSearch()
+    const [ searchText, setsearchText ] = useState("sony")
+
+    const search = async() => {
+         clearSearch()
+        try {
+            const response = await fetch(`https://api.takealot.com/rest/v-1-14-0/searches/products,filters,facets,sort_options,breadcrumbs,slots_audience,context,seo,layout?r=1&sb=1&si=16f505529571cecf83dcabb18c4118b6&qsearch=${searchText}&via=suggestions&searchbox=true&offer_opt=true`)
+            const data = await response.json()
+            const { sections } = data;
+            const { products } = sections;
+            const { results } = products;
+
+            results.map((data: any) => {
+                const {product_views} = data;
+                const { core /*, gallery*/ } = product_views;
+                // const { images } = gallery;
+                const { title /*, slug, subtitle, brand*/ } = core;
+                setSearch({title});
+            })
+        }catch{
+            clearSearch()
+        } finally{
+        }
+    }
+
+    useEffect(() => {
+        search()
+    },[])
+
     return (
         <View style={styles.view}>
             <TextInput
                 style={styles.textInput}
                 placeholder='Search any item'
+                onChangeText={(text) => {setsearchText(text)}}
             /> 
-            <Button title={"Search"} onPress={() => {}}/>
+            <Button title={"Search"} onPress={search}/>
         </View>
     );
 }
