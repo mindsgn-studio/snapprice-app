@@ -4,9 +4,15 @@ import { FlashList } from "@shopify/flash-list";
 import { useSearch } from '../store/search';
 import { width } from '../constants/dimensions';
 
-interface Search {
+interface Item {
     id: string,
-    title: string
+    title: string,
+    image: string,
+    price: string
+}
+
+interface ItemCardInterface {
+    item: Item
 }
 
 export default function Main() {
@@ -16,11 +22,13 @@ export default function Main() {
         <View style={styles.view}>
             <FlashList
                 data={search}
-                renderItem={({ item }: any) => 
+                renderItem={({ item }: ItemCardInterface) => 
                     <ItemCard
                         key={item.id}
-                        id={item.id} 
-                        title={item.title} />
+                        title={item.title}
+                        image={item.image}
+                        price={item.price}
+                    />
                     }
                 estimatedItemSize={100}
             />

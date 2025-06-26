@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, Button } from 'react-native';
 import { useSearch } from '../store/search';
+import { replaceString } from '../hooks/replaceString';
 
 export default function SearchInput() {
     const { setSearch, clearSearch } = useSearch()
     const [ searchText, setsearchText ] = useState("sony")
 
     const search = async() => {
-        if (searchText ==="") return 
+        if (searchText === "") return 
         clearSearch()
         try {
             const response = await fetch(`https://api.takealot.com/rest/v-1-14-0/searches/products,filters,facets,sort_options,breadcrumbs,slots_audience,context,seo,layout?r=1&sb=1&si=16f505529571cecf83dcabb18c4118b6&qsearch=${searchText}&via=suggestions&searchbox=true&offer_opt=true`)
@@ -17,15 +18,17 @@ export default function SearchInput() {
             const { results } = products;
 
             results.map((data: any) => {
-                const {product_views} = data;
-                const { core /*, gallery*/ } = product_views;
-                // const { images } = gallery;
-                const { title, id /*, slug, subtitle, brand*/ } = core;
-                setSearch({title, id});
+                const { product_views } = data;
+                const { core, gallery } = product_views;
+                const { images } = gallery;
+                const image = replaceString(images[0])
+                const { title, id } = core;
+                setSearch({title, id, image});
             })
         }catch{
             clearSearch()
         } finally{
+            
         }
     }
 
