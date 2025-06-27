@@ -1,16 +1,16 @@
 import { create } from 'zustand'
 
 interface Search {
-    id: string,
-    title: string,
-    image: string
-    price: string
+  id: string,
+  title: string,
+  image: string
+  price: string
 }
 
 interface SearchInterface {
-    search: Search[],
-    setSearch: (search: Search) => void,
-    clearSearch: () => void
+  search: Search[],
+  setSearch: (search: Search) => void,
+  clearSearch: () => void
 }
 
 const useSearch = create<SearchInterface>((set, get) => ({
@@ -20,7 +20,7 @@ const useSearch = create<SearchInterface>((set, get) => ({
     set({ search: [...oldSearch, search] });
   },
   clearSearch: () => set({search: []})
-}))
+}));
 
 
 export {

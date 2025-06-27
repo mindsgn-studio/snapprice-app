@@ -1,3 +1,4 @@
+import { useRouter } from 'expo-router';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
 type ItemCard = {
@@ -13,9 +14,20 @@ export default function ItemCard(
         price = "R0.00",
     }: ItemCard
 ) {
-    return (
+    const router = useRouter();
+
+    return (    
         <TouchableOpacity 
-            onPress={() => {}}
+            onPress={() => {
+                router.push({
+                    pathname: '/item',
+                    params: { 
+                        title,
+                        image,
+                        price
+                     }
+                })
+            }}
             style={styles.view}>
            <Image
                 style={styles.image}
