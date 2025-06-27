@@ -1,10 +1,11 @@
-import { View, StyleSheet, Image, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import { useLocalSearchParams  } from "expo-router";
 import { width } from '@/@src/constants/dimensions';
 import Button from '@/@src/components/button';
 import Details from '@/@src/components/details';
 
 interface Item {
+  id: string,
   title: string,
   image: string,
   price: string
@@ -27,17 +28,29 @@ export default function ItemScreen() {
           uri: `${image}`,
         }}
       />
-      <Details />
-      <Button title={"TRACK ITEM"} onPress={() => {}}/>
+      <Details 
+        price={price}
+        title={title}
+        id={id}
+      />
+      <View style={styles.bottom}>
+        <Button title={"TRACK ITEM"} onPress={() => {}}/>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
     container:{
+      flex:1,
+      backgroundColor:"#FFF"
     },
     image: {
       width,
       height: 350
+    },
+    bottom: {
+      display: "flex",
+      paddingBottom: 60,
     }
 });

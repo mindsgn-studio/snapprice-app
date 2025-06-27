@@ -1,0 +1,1114 @@
+{
+  "title": "Midea 6kg Front Loader 1000rpm - Titanium",
+  "desktop_href": "https://www.takealot.com/midea-6kg-front-loader-1000rpm-titanium/PLID93155744",
+  "core": {
+    "title": "Midea 6kg Front Loader 1000rpm - Titanium",
+    "slug": "midea-6kg-front-loader-1000rpm-titanium",
+    "subtitle": null,
+    "brand": "Midea",
+    "brand_url": {
+      "link_data": {
+        "path": "/all?filter=Brand:{brand_slug}",
+        "fields": {
+          "brand_slug": "Midea"
+        },
+        "action": "search"
+      }
+    },
+    "star_rating": 4.5,
+    "reviews": 92,
+    "formats": [],
+    "authors": [],
+    "links": [
+      {
+        "display_value": "Shop All Front Loaders",
+        "link_data": {
+          "action": "search",
+          "context": "navigation",
+          "parameters": {
+            "search": {
+              "filters": {
+                "Type": 12,
+                "Category": 27728
+              }
+            }
+          }
+        }
+      }
+    ],
+    "id": 93155744
+  },
+  "buybox": {
+    "plid": 93155744,
+    "tsin": 93650145,
+    "buybox_items_type": "single",
+    "is_digital": false,
+    "items": [
+      {
+        "is_selected": true,
+        "is_preorder": false,
+        "is_add_to_cart_available": true,
+        "is_add_to_wishlist_available": true,
+        "is_free_shipping_available": false,
+        "multibuy_display": false,
+        "delivery_charges": {
+          "heavy_charge": {
+            "cost": 200,
+            "info_title": "Delivery Surcharge",
+            "info": "Heavy / Bulky goods are delivered by a two-man team from the Takealot Delivery Team or one of our third-party couriers at a R 200 surcharge per item.",
+            "text": "+ R 200 Delivery Surcharge",
+            "info_type": "short",
+            "title": {
+              "description": "{0}",
+              "values": [
+                {
+                  "value_id": "0",
+                  "type": "bold",
+                  "value": "+ R 200 Delivery Surcharge"
+                }
+              ]
+            },
+            "description": {
+              "description": "No delivery surcharge for {0} members.",
+              "values": [
+                {
+                  "value_id": "0",
+                  "type": "link",
+                  "value": "TakealotMORE Premium",
+                  "url": "https://www.takealot.com/takealotmore"
+                }
+              ]
+            }
+          }
+        },
+        "offer_detail": {
+          "preference": "lowest_priced",
+          "display_text": "Best Price",
+          "icon_url": "https://static.takealot.com/images/buybox-icons/lowest_priced.png"
+        },
+        "sku": 206563530,
+        "price": 3999,
+        "pretty_price": "R 3,999",
+        "listing_price": 4399,
+        "add_to_cart_text": "Add to Cart",
+        "bundle_label": "Save with Bundle Deals (2)",
+        "sponsored_ads_seller_id": "R29841191",
+        "loyalty_prices": [
+          {
+            "id": "loyaltyprices-0",
+            "display_text": "eB39,990",
+            "prices": [
+              39990
+            ],
+            "info_text": null,
+            "description": null,
+            "info_mode": null,
+            "image": {
+              "source": "https://static.takealot.com/images/payment/ebucks-logo-@3x.svg",
+              "title": "Ebucks",
+              "alt_text": "Ebucks logo"
+            }
+          },
+          {
+            "id": "loyaltyprices-1",
+            "display_text": "39,990",
+            "prices": [
+              39990
+            ],
+            "info_text": null,
+            "description": null,
+            "info_mode": null,
+            "image": {
+              "source": "https://static.takealot.com/images/payment/discovery-miles-logo.svg",
+              "title": "DiscoveryMiles",
+              "alt_text": "Discovery Miles Logo"
+            }
+          }
+        ],
+        "credit_options_summary": {
+          "title": {
+            "description": "{0}",
+            "values": [
+              {
+                "value_id": "0",
+                "type": "bold",
+                "value": "Takealot.credit"
+              }
+            ]
+          },
+          "description": {
+            "description": "Buy using {0} for {1} x {2} months and get {3} of your purchase back{4}.",
+            "values": [
+              {
+                "value_id": "0",
+                "type": "bold",
+                "value": "takealot.credit"
+              },
+              {
+                "value_id": "1",
+                "type": "bold",
+                "value": "R 373 p/m"
+              },
+              {
+                "value_id": "2",
+                "type": "bold",
+                "value": "12"
+              },
+              {
+                "value_id": "3",
+                "type": "bold",
+                "value": "1%"
+              },
+              {
+                "value_id": "4",
+                "type": "bold",
+                "value": "*"
+              }
+            ],
+            "learn_more_link": {
+              "description": "{0}",
+              "values": [
+                {
+                  "value_id": "0",
+                  "type": "internal-link",
+                  "value": "Learn More"
+                }
+              ],
+              "code": "credit-options"
+            }
+          },
+          "image": {
+            "source": "https://static.takealot.com/images/payment/takealot_credit_logo@2x.png",
+            "alt_text": "Takealot.credit"
+          }
+        },
+        "stock_availability": {
+          "status": "In stock",
+          "is_leadtime": false,
+          "is_imported": false,
+          "distribution_centres": [
+            {
+              "id": "distribution_centre_0",
+              "text": "CPT",
+              "description": "This item is in stock in our Cape Town warehouse and can be shipped from there. This product is not currently eligible for collection.",
+              "info_type": "short"
+            },
+            {
+              "id": "distribution_centre_1",
+              "text": "DBN",
+              "description": "This item is in stock in our Durban warehouse and can be shipped from there. This product is not currently eligible for collection.",
+              "info_type": "short"
+            },
+            {
+              "id": "distribution_centre_2",
+              "text": "JHB",
+              "description": "This item is in stock in our Johannesburg warehouse and can be shipped from there. This product is not currently eligible for collection.",
+              "info_type": "short"
+            }
+          ],
+          "when_do_i_get_it_text": "Learn More",
+          "when_do_i_get_it_info": "## When do I get it?\n\nOur picking, packing and delivery is linked to what you order, where you want it delivered and how you choose to pay, so delivery times can vary.\nEstimates are provided below to help you shop, but always check your order’s Estimated Delivery Date during checkout for the most accurate delivery information.\n\n### Standard Delivery\n\nDelivery destination                      | Delivery time\n------------------------------------------|-----------------\nCape Town, Durban, Johannesburg, Pretoria | 2-5 working days\nRegional Area                             | 2-6 working days\nRemote Area                               | 3-7 working days\n\n### Premium Delivery Options\n\nOnly available in Main Centres (Cape Town, Durban, Johannesburg & Pretoria)\n\nDelivery type               | Delivery time                       | Cut Off time\n----------------------------|-------------------------------------|-----------------------------\nSame Day Delivery           | Same Day between 3pm - 7pm          | Pay before 10:00am weekdays\nNext Business Day Delivery  | Next Working Day between 7am - 7pm  | Pay before 11:59pm previous day\nSaturday Delivery           | Saturday between 11am - 7pm         | Pay before 11:59pm Friday\nSunday Delivery             | Sunday between 11am - 7pm           | Pay before 11:00am Saturday\n\n### Collections\nThis product is not currently eligible for collection.\n",
+          "display_seasonal_message": false,
+          "seasonal_message_text": null,
+          "seasonal_message_info": null,
+          "estimated_delivery": null
+        }
+      }
+    ]
+  },
+  "breadcrumbs": {
+    "items": [
+      {
+        "id": 12,
+        "name": "Home & Kitchen",
+        "slug": "home-kitchen",
+        "type": "department"
+      },
+      {
+        "id": 25720,
+        "name": "Large Appliances",
+        "slug": "large-appliances-25720",
+        "type": "category"
+      },
+      {
+        "id": 25723,
+        "name": "Washing & Drying",
+        "slug": "washing-and-drying-25723",
+        "type": "category"
+      },
+      {
+        "id": 25726,
+        "name": "Washing Machines",
+        "slug": "washing-machines-25726",
+        "type": "category"
+      },
+      {
+        "id": 27728,
+        "name": "Front Loaders",
+        "slug": "front-loaders-27728",
+        "type": "category"
+      }
+    ]
+  },
+  "gallery": {
+    "images": [
+      "https://media.takealot.com/covers_images/2d5490d142f548a698d78d1c6a7cf6ec/s-{size}.file",
+      "https://media.takealot.com/covers_images/61fa6a9e5eb74653a37fffd774650c55/s-{size}.file",
+      "https://media.takealot.com/covers_images/6e41e9d7249a42e088221f28bee98f04/s-{size}.file",
+      "https://media.takealot.com/covers_images/cd46af8364c046e9b923b75848ca0101/s-{size}.file",
+      "https://media.takealot.com/covers_images/d39c3cabb5234a0b94cc7bc57c281232/s-{size}.file",
+      "https://media.takealot.com/covers_images/dc641dec27b04c87b01d5d8a999628cd/s-{size}.file",
+      "https://media.takealot.com/covers_images/0bf819c9253e488ca105851664d30d42/s-{size}.file",
+      "https://media.takealot.com/covers_images/8c89ed34ebc3424ba57276e2fe873f88/s-{size}.file",
+      "https://media.takealot.com/covers_images/8f3cef91ab584e2e8deabf5a26711adc/s-{size}.file",
+      "https://media.takealot.com/covers_images/95db7164ac48494b899987f59a905942/s-{size}.file",
+      "https://media.takealot.com/covers_images/9e5e3515eec147238e790b421d419c5e/s-{size}.file",
+      "https://media.takealot.com/covers_images/7f2192a124fa4fe3a768fc1376f3684c/s-{size}.file",
+      "https://media.takealot.com/covers_images/48ef6b85a39a45ca95060330c7eb9670/s-{size}.file",
+      "https://media.takealot.com/covers_images/9ef002168a1f4524bad70624ac904b99/s-{size}.file",
+      "https://media.takealot.com/covers_images/86b02284acdb4279a61448b7f675790a/s-{size}.file",
+      "https://media.takealot.com/covers_images/00dc5b1d611e40ccb519dec5704ec179/s-{size}.file",
+      "https://media.takealot.com/covers_images/9f4ac98295c942dc97d2c805716c34a5/s-{size}.file",
+      "https://media.takealot.com/covers_images/e6766d8aeb774525ad0067d77b2ca0f8/s-{size}.file"
+    ],
+    "items": [
+      {
+        "image": "https://media.takealot.com/covers_images/2d5490d142f548a698d78d1c6a7cf6ec/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/2d5490d142f548a698d78d1c6a7cf6ec/s-{size}.file",
+        "youtube_key": "7_YINoNenvc",
+        "type": "video"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/61fa6a9e5eb74653a37fffd774650c55/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/6e41e9d7249a42e088221f28bee98f04/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/cd46af8364c046e9b923b75848ca0101/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/d39c3cabb5234a0b94cc7bc57c281232/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/dc641dec27b04c87b01d5d8a999628cd/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/0bf819c9253e488ca105851664d30d42/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/8c89ed34ebc3424ba57276e2fe873f88/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/8f3cef91ab584e2e8deabf5a26711adc/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/95db7164ac48494b899987f59a905942/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/9e5e3515eec147238e790b421d419c5e/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/7f2192a124fa4fe3a768fc1376f3684c/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/48ef6b85a39a45ca95060330c7eb9670/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/9ef002168a1f4524bad70624ac904b99/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/86b02284acdb4279a61448b7f675790a/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/00dc5b1d611e40ccb519dec5704ec179/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/9f4ac98295c942dc97d2c805716c34a5/s-{size}.file",
+        "type": "image"
+      },
+      {
+        "image": "https://media.takealot.com/covers_images/e6766d8aeb774525ad0067d77b2ca0f8/s-{size}.file",
+        "type": "image"
+      }
+    ]
+  },
+  "product_information": {
+    "categories": {
+      "id": "categories-0",
+      "display_name": "Categories",
+      "source": "productline-categories",
+      "content_type": "text/markdown",
+      "displayable_text": "- [Home & Kitchen](/home-kitchen) / [Large Appliances](/home-kitchen/large-appliances-25720) / [Washing & Drying](/home-kitchen/washing-and-drying-25723) / [Washing Machines](/home-kitchen/washing-machines-25726) / [Front Loaders](/home-kitchen/front-loaders-27728)"
+    },
+    "items": [
+      {
+        "id": "categories-0",
+        "display_name": "Categories",
+        "source": "productline-categories",
+        "content_type": "text/markdown",
+        "displayable_text": "- [Home & Kitchen](/home-kitchen) / [Large Appliances](/home-kitchen/large-appliances-25720) / [Washing & Drying](/home-kitchen/washing-and-drying-25723) / [Washing Machines](/home-kitchen/washing-machines-25726) / [Front Loaders](/home-kitchen/front-loaders-27728)"
+      },
+      {
+        "id": "attributes-0",
+        "display_name": "Brand",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "[Midea](/all?filter=Brand:Midea)",
+        "item_type": "brand"
+      },
+      {
+        "id": "attributes-1",
+        "display_name": "Capacity",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "6 L",
+        "item_type": "capacity"
+      },
+      {
+        "id": "attributes-2",
+        "display_name": "Warranty",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "Supplier \\(60 months\\)",
+        "item_type": "warranty"
+      },
+      {
+        "id": "attributes-3",
+        "display_name": "Washing Machine Spin Speed",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "1000.0 rpm",
+        "item_type": "spin_speed"
+      },
+      {
+        "id": "attributes-4",
+        "display_name": "Water Usage",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "43.0 L",
+        "item_type": "water_usage"
+      },
+      {
+        "id": "attributes-5",
+        "display_name": "Model",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "MF100W60\\-T",
+        "item_type": "model_number"
+      },
+      {
+        "id": "attributes-6",
+        "display_name": "Energy Rating",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "A\\+\\+\\+",
+        "item_type": "energy_rating"
+      },
+      {
+        "id": "attributes-7",
+        "display_name": "Childproof",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "Yes",
+        "item_type": "is_childproof"
+      },
+      {
+        "id": "attributes-8",
+        "display_name": "What's in the box",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "1 x Washing Machine  \n1 x User Manual  \n1 x Water Pipes  \n1 x User Manual  \n4 x cover caps",
+        "item_type": "whats_in_the_box"
+      },
+      {
+        "id": "attributes-9",
+        "display_name": "Assembled Dimensions",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "40.0 x 59.5 x 85.0 cm",
+        "item_type": "product_dimensions"
+      },
+      {
+        "id": "attributes-10",
+        "display_name": "LED Display / Touch control",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "Yes",
+        "item_type": "has_led_touch_control"
+      },
+      {
+        "id": "attributes-11",
+        "display_name": "Household Appliance Type",
+        "source": "product-line-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "Washing Machine",
+        "item_type": "household_appliance_type"
+      },
+      {
+        "id": "attributes-12",
+        "display_name": "Colour Name",
+        "source": "tsin-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "Titanium",
+        "item_type": "color_name"
+      },
+      {
+        "id": "attributes-13",
+        "display_name": "Basic Colours",
+        "source": "tsin-attribute-service",
+        "content_type": "text/markdown",
+        "displayable_text": "Silver, Black",
+        "item_type": "basic_colors"
+      },
+      {
+        "id": "attributes-14",
+        "display_name": "Barcode",
+        "source": "tsin-barcodes",
+        "content_type": "text/markdown",
+        "displayable_text": "6945878334892",
+        "item_type": "barcode"
+      }
+    ],
+    "tab_title": "Product Information"
+  },
+  "description": {
+    "tab_title": "Description",
+    "html": "<p><iframe width=\"640\" height=\"360\" frameborder=\"0\" src=\"https://www.youtube.com/embed/7_YINoNenvc\"></iframe></p><br />\n<h3><strong>Midea MF100W60/T 6kg Front Loader Washing Machine - Efficient & Reliable</strong></h3><p>Experience <strong>efficient, powerful, and user-friendly</strong> laundry care with the <strong>Midea 6kg Front Loader Washing Machine</strong>. Designed with <strong>energy efficiency (A+++ rating)</strong>, a <strong>universal motor</strong>, and a <strong>1000 RPM spin speed</strong>, this washing machine ensures <strong>fast and effective cleaning</strong> while <strong>minimizing energy consumption</strong>.</p><h3><strong>Key Features</strong></h3><p> <strong>6kg Wash & Spin Capacity</strong> - Ideal for <strong>small households or individuals</strong>.<br/> <strong>Energy Efficiency Class A+++</strong> - <strong>Saves electricity & reduces utility costs</strong>.<br/> <strong>1000 RPM Spin Speed</strong> - Ensures <strong>quicker drying & efficient water extraction</strong>.<br/> <strong>15-Minute Quick Wash</strong> - Perfect for <strong>lightly soiled clothes</strong> & <strong>fast laundry cycles</strong>.<br/> <strong>LED Display</strong> - <strong>Easy-to-use digital interface</strong> for seamless operation.<br/> <strong>Child Lock Function</strong> - Prevents <strong>accidental adjustments during wash cycles</strong>.<br/> <strong>Universal Motor</strong> - <strong>Powerful yet reliable</strong> for long-term usage.<br/> <strong>Delay Function</strong> - Schedule washes <strong>at your convenience</strong>.<br/> <strong>Water Consumption per Cycle: 43L</strong> - <strong>Optimized for water efficiency</strong>.</p><h3><strong>Specifications</strong></h3><ul><li><strong>Model:</strong> MF100W60/T</li><li><strong>Color:</strong> Titanium</li><li><strong>Washing Capacity:</strong> 6kg</li><li><strong>Rated Power:</strong> 2050W</li><li><strong>Spin Speed:</strong> 1000 RPM</li><li><strong>Motor Type:</strong> Universal Motor</li><li><strong>Quick Wash Time:</strong> 15 Minutes</li><li><strong>Energy Rating:</strong> A+++</li><li><strong>Water Consumption per Cycle:</strong> 43L</li></ul><h3><strong>Dimensions</strong></h3><p> <strong>Product Dimensions:</strong><br/> <strong>Length:</strong> 595mm<br/> <strong>Width:</strong> 400mm<br/> <strong>Height:</strong> 850mm<br/> <strong>Net Weight:</strong> 52kg</p><h3><strong>Why Choose Midea MF100W60/T?</strong></h3><p> <strong>Compact & Stylish Design</strong> - Fits easily in <strong>apartments & small laundry spaces</strong>.<br/> <strong>Energy Efficient</strong> - <strong>A+++ rating</strong> means <strong>lower power bills & eco-friendly washing</strong>.<br/> <strong>Fast Wash Option</strong> - <strong>Quick 15-minute cycle</strong> for <strong>time-saving laundry</strong>.<br/> <strong>User-Friendly Features</strong> - <strong>LED Display & Delay Function</strong> for <strong>convenience</strong>.<br/> <strong>Trusted Midea Quality</strong> - <strong>Durable, high-performance washing machine</strong>.</p><p>The <strong>Midea MF100W60/T 6kg Front Loader</strong> is the <strong>perfect balance of efficiency, functionality, and affordability</strong>. Whether you need <strong>fast washes, energy savings, or reliable performance</strong>, this machine delivers on all fronts!</p><p></p><p><strong>Warranty - 5 Years</strong></p><p><strong>Before using your new machine for the first time, the transport bolts must be removed</strong></p><p>What's in the box<br />\n1 x Washing Machine<br />\n1 x User Manual<br />\n1 x Water Pipes<br />\n1 x User Manual<br />\n4 x cover caps</p>\n"
+  },
+  "bullet_point_attributes": {
+    "items": [
+      {
+        "description": "## Hassle-Free Exchanges & Returns for 30 Days\n\n### **Returns**\n\nIf you are not completely satisfied, simply return the items to us in their original condition and packaging within 30 days of receipt and we will issue a credit which can be used to place a new order.\n\n### Exchanges  (Fashion, sportswear and shoes only)\n\nThe item must be unworn and unused (other than trials) with the original tags still attached. Packaging should be returned in an undamaged condition with the item.\n\n### When does this policy not apply?\n\nIf the item is:\n- older than 30 days\n- opened, unsealed, used or missing any accessories\n- a digital product such as an eBook, electronic voucher, gaming code or other digital downloads;\n- an audio or video recording or computer software that has been unsealed;\n- a newspaper, periodical or magazine;\n- a foodstuff, beverage, or other product intended for everyday consumption;\n- a nursing or maternity product that has been unsealed, including (but not limited to) breast pumps, bottles, formula, maternity underwear, nappies and wipes;\n- a beauty product or fragrance which has been used;\n- a product which has been personalised or made to your specifications.\n\n\nFind out more about [Exchanges & Returns](https://www.takealot.com/help-centre).\n",
+        "positive": true,
+        "text": "Hassle-Free Exchanges & Returns for 30 Days.",
+        "info_mode": "long",
+        "type": "hassle_free_exchanges_and_returns",
+        "id": "bullet-point-0"
+      },
+      {
+        "description": "Carries a warranty as defined by the manufacturer - please make sure that you register your warranty with the original manufacturer after purchase. Takealot cannot facilitate any warranty claims besides delivery damages, please contact the manufacturer directly for any warranty claims.",
+        "positive": true,
+        "text": "60-Month Manufacturer Warranty.",
+        "info_mode": "short",
+        "type": "warranty",
+        "id": "bullet-point-1"
+      }
+    ]
+  },
+  "reviews": {
+    "count": 92,
+    "href": "https://api.takealot.com/rest/v-1-14-0/product-reviews/plid/93155744",
+    "tab_title": "Reviews (92)",
+    "link_data": {
+      "path": "/rest/{api_version}/product-reviews/plid/{plid}",
+      "fields": {
+        "api_version": "v-1-14-0",
+        "plid": "93155744"
+      }
+    },
+    "star_rating": 4.5,
+    "distribution": {
+      "num_1_star_ratings": 4,
+      "num_2_star_ratings": 1,
+      "num_3_star_ratings": 5,
+      "num_4_star_ratings": 17,
+      "num_5_star_ratings": 65
+    }
+  },
+  "meta": {
+    "identifier": "PLID93155744",
+    "href": "https://api.takealot.com/rest/v-1-14-0/product-details/PLID93155744?platform=desktop",
+    "link_data": {
+      "path": "/rest/{api_version}/product-details/{plid}?platform={platform}",
+      "fields": {
+        "api_version": "v-1-14-0",
+        "plid": "PLID93155744",
+        "platform": "desktop"
+      }
+    },
+    "date_retrieved": "2025-06-27T13:07:08.878213",
+    "display": true,
+    "type": "ProductDetails"
+  },
+  "frequently_bought_together": {
+    "href": "https://api.takealot.com/rest/v-1-14-0/product-details/PLID93155744/frequently-bought-together?platform=desktop",
+    "link_data": {
+      "path": "/rest/{api_version}/product-details/{plid_str}/frequently-bought-together?platform={platform}",
+      "fields": {
+        "api_version": "v-1-14-0",
+        "plid_str": "PLID93155744",
+        "platform": "desktop"
+      }
+    }
+  },
+  "customers_also_bought": {
+    "href": "https://api.takealot.com/rest/v-1-14-0/product-details/PLID93155744/customers-also-bought?platform=desktop",
+    "link_data": {
+      "path": "/rest/{api_version}/product-details/{plid_str}/customers-also-bought?platform={platform}",
+      "fields": {
+        "api_version": "v-1-14-0",
+        "plid_str": "PLID93155744",
+        "platform": "desktop"
+      }
+    }
+  },
+  "top_navigation": {
+    "items": [
+      {
+        "id": "topnav-129",
+        "text": "All Home",
+        "href": "/home-kitchen",
+        "foreground": "#333333",
+        "background": "#ededed",
+        "font_styling": []
+      },
+      {
+        "id": "topnav-133",
+        "text": "Appliances",
+        "href": "/home-kitchen/appliances",
+        "foreground": "#333333",
+        "background": "#ededed",
+        "font_styling": []
+      },
+      {
+        "id": "topnav-353",
+        "text": "Home Inspiration",
+        "href": "/home-kitchen/homeinspiration",
+        "foreground": "#333",
+        "background": "#ededed",
+        "font_styling": []
+      },
+      {
+        "id": "topnav-130",
+        "text": "Kitchen",
+        "href": "/home-kitchen/kitchen",
+        "foreground": "#333333",
+        "background": "#ededed",
+        "font_styling": []
+      },
+      {
+        "id": "topnav-132",
+        "text": "Dining & Entertaining",
+        "href": "/home-kitchen/dining_entertaining",
+        "foreground": "#333333",
+        "background": "#ededed",
+        "font_styling": []
+      },
+      {
+        "id": "topnav-135",
+        "text": "Furniture & Home Decor",
+        "href": "/home-kitchen/furniture",
+        "foreground": "#333333",
+        "background": "#ededed",
+        "font_styling": []
+      },
+      {
+        "id": "topnav-134",
+        "text": "Bedroom & Bathroom",
+        "href": "/home-kitchen/bedbathhome",
+        "foreground": "#333333",
+        "background": "#ededed",
+        "font_styling": []
+      }
+    ]
+  },
+  "exchanges_and_returns": {
+    "tab_title": "Exchanges and Returns",
+    "copy": "### Free exchanges & returns for 30 days\n\nWrong size? Not quite what you wanted? You can exchange or return your purchase up to 30 days from the day you received it.\n\n1. Log your exchange or return request via your [Takealot Account profile](https://secure.takealot.com/account/).\n2. Prepare your return parcel.\n3. Wait for courier collection or drop off the parcel yourself.\n4. If approved, your account will be credited.\n\n[Find out more](https://www.takealot.com/help/fashion-exchanges-returns)\n"
+  },
+  "other_offers": {
+    "title": "Other Offers",
+    "conditions": [
+      {
+        "id": "id-new",
+        "condition": "New",
+        "from_price": 4614,
+        "count": 1,
+        "items": [
+          {
+            "id": "other-buying-option-209410353",
+            "product_id": 209410353,
+            "price": 4614,
+            "stock_availability": {
+              "is_in_stock": false,
+              "is_leadtime": true,
+              "is_imported": false,
+              "status": "Ships in 7 - 9 work days",
+              "distribution_centres": [],
+              "when_do_i_get_it_text": "Learn More",
+              "when_do_i_get_it_info": "## When do I get it?\n\nOur picking, packing and delivery is linked to what you order, where you want it delivered and how you choose to pay, so delivery times can vary. Estimates are provided below to help you shop, but always check your order’s Estimated Delivery Date during checkout for the most accurate delivery information.\n\n### Standard Delivery\n\nShipping Time*                 | Cape Town, Durban, Johannesburg & Pretoria Delivery Time**   | Regional Area Delivery Time**   | Remote Area Delivery Time**\n-------------------------------|--------------------------------------------------------------|---------------------------------|------------------------------\nShipped in 3-5 working days    | 1-2 weeks                                                    | 1-2 weeks                       | 2-3 weeks\nShipped in 5-7 working days    | 1-2 weeks                                                    | 2-3 weeks                       | 2-3 weeks\nShipped in 7-10 working days   | 2-3 weeks                                                    | 2-4 weeks                       | 2-4 weeks\nShipped in 10-15 working days  | 3-4 weeks                                                    | 3-4 weeks                       | 3-4 weeks\nShipped in 15-20 working days  | 3-5 weeks                                                    | 3-5 weeks                       | 3-5 weeks\n\n\n### Collections\nThis product is not currently eligible for collection.\n\n\\* Shipping time indicates how long it takes a product to reach our warehouse from our supplier.\n\n** Delivery estimates include shipping times.\n",
+              "display_seasonal_message": false,
+              "seasonal_message_text": null,
+              "seasonal_message_info": null,
+              "estimated_delivery": null
+            },
+            "is_takealot": false,
+            "seller": {
+              "seller_id": 29824440,
+              "display_name": "YB Ambiente",
+              "seller_vat_status": {
+                "enabled": true,
+                "text": "VAT Registered",
+                "tooltip": "This seller is registered for VAT."
+              },
+              "link_data": {
+                "path": "/seller/{seller_slug}?sellers={seller_id}",
+                "fields": {
+                  "seller_id": "29824440",
+                  "seller_slug": "yb-ambiente"
+                }
+              },
+              "seller_reviews": {
+                "average_star_rating": 4.3,
+                "total_count_value": 1290,
+                "total_count_display": "1.3k",
+                "tooltip": {
+                  "text": "The seller score reflects the average of recent customer ratings across all products sold by the seller.",
+                  "info_mode": "short"
+                }
+              }
+            },
+            "delivery_charges": {
+              "heavy_charge": {
+                "cost": 200.0,
+                "text": "+ R 200 Delivery Surcharge",
+                "title": {
+                  "description": "{0}",
+                  "values": [
+                    {
+                      "value_id": "0",
+                      "type": "bold",
+                      "value": "+ R 200 Delivery Surcharge"
+                    }
+                  ]
+                },
+                "description": {
+                  "description": "No delivery surcharge for {0} members.",
+                  "values": [
+                    {
+                      "value_id": "0",
+                      "type": "link",
+                      "value": "TakealotMORE Premium",
+                      "url": "https://www.takealot.com/takealotmore"
+                    }
+                  ]
+                },
+                "info": "Heavy / Bulky goods are delivered by a two-man team from the Takealot Delivery Team or one of our third-party couriers at a R 200 surcharge per item.",
+                "info_title": "Delivery Surcharge",
+                "info_type": "short"
+              }
+            },
+            "event_data": {
+              "documents": {
+                "product": {
+                  "product_line_id": 93155744,
+                  "in_stock": false,
+                  "market_place_listing": true,
+                  "sku_id": 209410353,
+                  "purchase_price": 4614,
+                  "lead_time": "Shipped in 7 - 9 working days"
+                }
+              }
+            },
+            "enhanced_ecommerce_add_to_cart": {
+              "ecommerce": {
+                "add": {
+                  "products": [
+                    {
+                      "id": "PLID93155744",
+                      "name": "Midea 6kg Front Loader 1000rpm - Titanium",
+                      "category": "Home & Kitchen/Large Appliances/Washing & Drying/Washing Machines/Front Loaders",
+                      "price": 4614,
+                      "quantity": 1,
+                      "position": 0,
+                      "brand": "Midea",
+                      "variant": null,
+                      "dimension1": null,
+                      "dimension2": 206563530,
+                      "list": "Other Offers"
+                    }
+                  ]
+                },
+                "currencyCode": "ZAR"
+              },
+              "event": "addToCart"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "bundle_deals": {
+    "tab_title": "Bundle Deals (2)",
+    "count": 2,
+    "href": "https://api.takealot.com/rest/v-1-14-0/product-details/PLID93155744/bundle-deals/109241,106519?platform=desktop",
+    "link_data": {
+      "path": "/rest/{api_version}/product-details/{plid}/bundle-deals/{bundle_ids}?platform={platform}",
+      "fields": {
+        "api_version": "v-1-14-0",
+        "plid": "PLID93155744",
+        "bundle_ids": "109241,106519",
+        "platform": "desktop"
+      }
+    }
+  },
+  "seo": {
+    "title": "Midea 6kg Front Loader 1000rpm - Titanium | Shop Today. Get it Tomorrow! | takealot.com",
+    "description": "Midea 6kg Front Loader 1000rpm - Titanium. Hassle-Free Exchanges & Returns for 30 Days. 60-Month Manufacturer Warranty. Many ways to pay. Shop anything you can imagine!",
+    "canonical": "https://www.takealot.com/midea-6kg-front-loader-1000rpm-titanium/PLID93155744",
+    "alternate": {
+      "handheld": "https://m.takealot.com/midea-6kg-front-loader-1000rpm-titanium/PLID93155744",
+      "android": "android-app://fi.android.takealot/app/takealot.com/product/PLID93155744"
+    },
+    "x_robots_tag": "index, follow, archive, max-image-preview: large",
+    "last_modified": "Thu, 26 Jun 2025 20:19:24 GMT"
+  },
+  "pdp_ad_slots": {
+    "ad_slots": [
+      {
+        "targeting": {
+          "category": [
+            "25720",
+            "25723",
+            "25726",
+            "27728"
+          ],
+          "brand": "midea",
+          "environment": "production",
+          "platform": "desktop",
+          "plid": "93155744",
+          "type": [
+            "12"
+          ],
+          "price": "3000-3999"
+        },
+        "id": "pdp_slot_1",
+        "supported_sizes": [
+          {
+            "viewport": [
+              1259,
+              0
+            ],
+            "sizes": [
+              [
+                300,
+                50
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              1024,
+              0
+            ],
+            "sizes": [
+              [
+                970,
+                90
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              768,
+              0
+            ],
+            "sizes": [
+              [
+                728,
+                90
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              490,
+              0
+            ],
+            "sizes": [
+              [
+                468,
+                60
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              300,
+              0
+            ],
+            "sizes": [
+              [
+                300,
+                50
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              0,
+              0
+            ],
+            "sizes": []
+          }
+        ],
+        "type": "GoogleAdSlot",
+        "div_id": "div-gpt-ad-30240790935436380886139702616408255314",
+        "ad_unit": "/21681910165/pdp_slot_1"
+      },
+      {
+        "targeting": {
+          "category": [
+            "25720",
+            "25723",
+            "25726",
+            "27728"
+          ],
+          "brand": "midea",
+          "environment": "production",
+          "platform": "desktop",
+          "plid": "93155744",
+          "type": [
+            "12"
+          ],
+          "price": "3000-3999"
+        },
+        "id": "pdp_slot_2",
+        "supported_sizes": [
+          {
+            "viewport": [
+              1259,
+              0
+            ],
+            "sizes": [
+              [
+                300,
+                250
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              1024,
+              0
+            ],
+            "sizes": [
+              [
+                970,
+                90
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              768,
+              0
+            ],
+            "sizes": [
+              [
+                728,
+                90
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              490,
+              0
+            ],
+            "sizes": [
+              [
+                468,
+                60
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              300,
+              0
+            ],
+            "sizes": [
+              [
+                300,
+                250
+              ]
+            ]
+          },
+          {
+            "viewport": [
+              0,
+              0
+            ],
+            "sizes": []
+          }
+        ],
+        "type": "GoogleAdSlot",
+        "div_id": "div-gpt-ad-30922398690278206930682498495219469865",
+        "ad_unit": "/21681910165/pdp_slot_2"
+      }
+    ]
+  },
+  "sharing": {
+    "url": "https://www.takealot.com/midea-6kg-front-loader-1000rpm-titanium/PLID93155744",
+    "enabled": [
+      "facebook",
+      "twitter",
+      "pinterest",
+      "email",
+      "whatsapp"
+    ],
+    "copy": {
+      "body": {
+        "email": "Check this out on takealot: Midea 6kg Front Loader 1000rpm - Titanium%0Ahttps://www.takealot.com/midea-6kg-front-loader-1000rpm-titanium/PLID93155744",
+        "twitter": "Midea 6kg Front Loader 1000rpm - Titanium available to buy online at @TAKEALOT We offer fast, reliable delivery to your door.",
+        "facebook": "I love this product on takealot.com: Midea 6kg Front Loader 1000rpm - Titanium https://www.takealot.com/midea-6kg-front-loader-1000rpm-titanium/PLID93155744",
+        "whatsapp": "Check this out on takealot.com, Midea 6kg Front Loader 1000rpm - Titanium https://www.takealot.com/midea-6kg-front-loader-1000rpm-titanium/PLID93155744",
+        "pinterest": "Midea 6kg Front Loader 1000rpm - Titanium | Buy Online in South Africa | https://www.takealot.com/midea-6kg-front-loader-1000rpm-titanium/PLID93155744"
+      },
+      "subject": {
+        "email": "Check this out on takealot: Midea 6kg Front Loader 1000rpm - Titanium"
+      }
+    }
+  },
+  "data_layer": {
+    "name": "Midea 6kg Front Loader 1000rpm - Titanium",
+    "sku": 93650145,
+    "tsin": "TSIN93650145",
+    "event": "product",
+    "quantity": 1,
+    "categoryname": [
+      "Large Appliances",
+      "Washing & Drying",
+      "Washing Machines",
+      "Front Loaders"
+    ],
+    "totalPrice": 3999,
+    "productlineSku": "PLID93155744-93650145",
+    "departmentname": "Home & Kitchen",
+    "departmentid": 12,
+    "pageType": "product",
+    "categoryid": [
+      25720,
+      25723,
+      25726,
+      27728
+    ],
+    "prodid": "PLID93155744"
+  },
+  "event_data": {
+    "documents": {
+      "product": {
+        "product_line_id": 93155744,
+        "in_stock": true,
+        "market_place_listing": false,
+        "sku_id": 206563530,
+        "purchase_price": 3999,
+        "original_price": 4399,
+        "lead_time": "In stock - shipped from CPT, DBN OR JHB",
+        "promotions": [
+          {
+            "promo_id": 109241,
+            "group_id": 5,
+            "promo_name": "Washing machine set up 58"
+          },
+          {
+            "promo_id": 108935,
+            "group_id": 1,
+            "promo_name": "June month end Large Appliance deals"
+          },
+          {
+            "promo_id": 106519,
+            "group_id": 5,
+            "promo_name": "Washing machine set up 110"
+          },
+          {
+            "promo_id": 105706,
+            "group_id": 4,
+            "promo_name": "Pay Day Deals"
+          }
+        ]
+      }
+    }
+  },
+  "flixmedia": {
+    "tab_title": "Featured Content",
+    "distributor": "6320",
+    "brand": "Midea",
+    "mpn": "6945878334892",
+    "ean": "6945878334892",
+    "language": "za",
+    "fallback_language": "za",
+    "featured_content_description": "Explore detailed product features and stunning image galleries",
+    "featured_content_button": "Explore"
+  },
+  "enhanced_ecommerce_detail": {
+    "ecommerce": {
+      "detail": {
+        "products": [
+          {
+            "id": "PLID93155744",
+            "name": "Midea 6kg Front Loader 1000rpm - Titanium",
+            "category": "Home & Kitchen/Large Appliances/Washing & Drying/Washing Machines/Front Loaders",
+            "price": 3999,
+            "quantity": 1,
+            "position": 0,
+            "brand": "Midea",
+            "variant": null,
+            "dimension1": null,
+            "dimension2": 206563530
+          }
+        ],
+        "actionField": {
+          "list": "product"
+        }
+      }
+    },
+    "event": "eec.detail"
+  },
+  "enhanced_ecommerce_add_to_cart": {
+    "ecommerce": {
+      "add": {
+        "products": [
+          {
+            "id": "PLID93155744",
+            "name": "Midea 6kg Front Loader 1000rpm - Titanium",
+            "category": "Home & Kitchen/Large Appliances/Washing & Drying/Washing Machines/Front Loaders",
+            "price": 3999,
+            "quantity": 1,
+            "position": 0,
+            "brand": "Midea",
+            "variant": null,
+            "dimension1": null,
+            "dimension2": 206563530
+          }
+        ]
+      },
+      "currencyCode": "ZAR"
+    },
+    "event": "addToCart"
+  },
+  "report_product": {
+    "copy": "Report this product",
+    "sku": 206563530
+  }
+}
