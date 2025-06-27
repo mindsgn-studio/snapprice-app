@@ -2,6 +2,7 @@ import { useRouter } from 'expo-router';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
 type ItemCard = {
+    id: string,
     title: string,
     image: string,
     price: string,
@@ -9,6 +10,7 @@ type ItemCard = {
 
 export default function ItemCard(
     {
+        id,
         title,
         image,
         price = "R0.00",
@@ -22,6 +24,7 @@ export default function ItemCard(
                 router.push({
                     pathname: '/item',
                     params: { 
+                        id, 
                         title,
                         image,
                         price

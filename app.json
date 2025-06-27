@@ -2,7 +2,7 @@
   "expo": {
     "name": "snap-price",
     "slug": "snap-price",
-    "version": "0.0.1",
+    "version": "0.0.4",
     "orientation": "portrait",
     "icon": "./@src/images/icon.png",
     "scheme": "snap-price",

@@ -25,6 +25,7 @@ export default function Main() {
                 renderItem={({ item }: ItemCardInterface) => 
                     <ItemCard
                         key={item.id}
+                        id={item.id}
                         title={item.title}
                         image={item.image}
                         price={item.price}

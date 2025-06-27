@@ -4,8 +4,8 @@ import { useSearch } from '../store/search';
 import { replaceString } from '../hooks/replaceString';
 
 export default function SearchInput() {
-    const { setSearch, clearSearch } = useSearch()
-    const [ searchText, setsearchText ] = useState("sony")
+    const { setSearch, clearSearch } = useSearch();
+    const [ searchText, setsearchText ] = useState("sony");
 
     const search = async() => {
         if (searchText === "") return 
@@ -31,11 +31,11 @@ export default function SearchInput() {
         } finally{
             
         }
-    }
+    };
 
     useEffect(() => {
         search()
-    },[])
+    },[]);
 
     return (
         <View style={styles.view}>
