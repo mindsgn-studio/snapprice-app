@@ -19,11 +19,12 @@ export default function SearchInput() {
 
             results.map((data: any) => {
                 const { product_views } = data;
-                const { core, gallery } = product_views;
+                const { core, gallery, buybox_summary } = product_views;
                 const { images } = gallery;
-                const image = replaceString(images[0])
+                const image = replaceString(images[0]);
                 const { title, id } = core;
-                setSearch({title, id, image});
+                const { pretty_price } = buybox_summary
+                setSearch({title, id, image, price: pretty_price});
             })
         }catch{
             clearSearch()
@@ -59,6 +60,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 80,
+        marginBottom: 20,
         alignSelf: "center"
     },
     textInput:{
