@@ -26,6 +26,7 @@ export default function RootLayout() {
     <Provider store={store}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="item" options={{ headerShown: false, presentation: "modal" }} />
       </Stack>
     </Provider>
   );
