@@ -1,4 +1,4 @@
-import { View, StyleSheet, Image, ImageBackground } from 'react-native';
+import { View, StyleSheet, ImageBackground } from 'react-native';
 import { useLocalSearchParams  } from "expo-router";
 import { width } from '@/@src/constants/dimensions';
 import Button from '@/@src/components/button';
@@ -29,7 +29,10 @@ export default function ItemScreen() {
         }}
       />
       <Details 
-      id={id}/>
+        price={price}
+        title={title}
+        id={id}
+      />
       <View style={styles.bottom}>
         <Button title={"TRACK ITEM"} onPress={() => {}}/>
       </View>
