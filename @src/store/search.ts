@@ -1,7 +1,10 @@
 import { create } from 'zustand'
 
 interface Search {
-    title: string
+    id: string,
+    title: string,
+    image: string
+    price: string
 }
 
 interface SearchInterface {
@@ -14,7 +17,6 @@ const useSearch = create<SearchInterface>((set, get) => ({
   search: [],
   setSearch: (search: Search) => {
     const oldSearch = get().search;
-    console.log(oldSearch);
     set({ search: [...oldSearch, search] });
   },
   clearSearch: () => set({search: []})

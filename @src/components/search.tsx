@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, View, TextInput, Button } from 'react-native';
 import { useSearch } from '../store/search';
+import { replaceString } from '../hooks/replaceString';
 
 export default function SearchInput() {
     const { setSearch, clearSearch } = useSearch()
     const [ searchText, setsearchText ] = useState("sony")
 
     const search = async() => {
-         clearSearch()
+        if (searchText === "") return 
+        clearSearch()
         try {
             const response = await fetch(`https://api.takealot.com/rest/v-1-14-0/searches/products,filters,facets,sort_options,breadcrumbs,slots_audience,context,seo,layout?r=1&sb=1&si=16f505529571cecf83dcabb18c4118b6&qsearch=${searchText}&via=suggestions&searchbox=true&offer_opt=true`)
             const data = await response.json()
@@ -16,15 +18,18 @@ export default function SearchInput() {
             const { results } = products;
 
             results.map((data: any) => {
-                const {product_views} = data;
-                const { core /*, gallery*/ } = product_views;
-                // const { images } = gallery;
-                const { title /*, slug, subtitle, brand*/ } = core;
-                setSearch({title});
+                const { product_views } = data;
+                const { core, gallery, buybox_summary } = product_views;
+                const { images } = gallery;
+                const image = replaceString(images[0]);
+                const { title, id } = core;
+                const { pretty_price } = buybox_summary
+                setSearch({title, id, image, price: pretty_price});
             })
         }catch{
             clearSearch()
         } finally{
+            
         }
     }
 
@@ -55,6 +60,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 80,
+        marginBottom: 20,
         alignSelf: "center"
     },
     textInput:{
