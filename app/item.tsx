@@ -2,7 +2,7 @@ import { View, StyleSheet, Image, ImageBackground } from 'react-native';
 import { useLocalSearchParams  } from "expo-router";
 import { width } from '@/@src/constants/dimensions';
 import Button from '@/@src/components/button';
-import Details from '@/@src/components/detailes';
+import Details from '@/@src/components/details';
 
 interface Item {
   title: string,

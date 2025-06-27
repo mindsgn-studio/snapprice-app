@@ -21,7 +21,6 @@ export default function Details(
         <View
             style={styles.container}
         >
-            
         </View>
     );
 }
