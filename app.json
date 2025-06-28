@@ -2,7 +2,7 @@
   "expo": {
     "name": "snap-price",
     "slug": "snap-price",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "orientation": "portrait",
     "icon": "./@src/images/icon.png",
     "scheme": "snap-price",
@@ -11,7 +11,7 @@
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "mindsgn.studio.snap-price",
-      "buildNumber": "1",
+      "buildNumber": "5",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }

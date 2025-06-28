@@ -41,31 +41,26 @@ export default function Details(
         }
     };
 
+    const getData = async() => {
+        try {
+            const response = await fetch(`https://www.servaltracker.com/products/PLID${id}/`);
+            const data = await response.text();
+        } catch(error){
+        } finally {
+        }
+    }
+
     useEffect(() => {
         getDetails();
+        getData();
     },[]);
 
     return (
         <View
             style={styles.container}
         >
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.price}>{price}</Text>
-            {
-                /*
-                <LineGraph points={[
-                    {
-                        value: 1, date: new Date(),
-                    },
-                    {
-                        value: 5, date: new Date(),
-                    },
-                    {
-                        value: 6, date: new Date(),
-                    }
-                ]} color="#4484B2" animated={false} />
-                */
-            }
+            <Text numberOfLines={1} style={styles.title}>{title}</Text>
+            <Text numberOfLines={1} style={styles.price}>{price}</Text>
         </View>
     );
 }
@@ -79,7 +74,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 28,
-        fontWeight: "bold"
     },
     price: {
         fontSize: 28,
