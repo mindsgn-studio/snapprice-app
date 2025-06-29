@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, } from 'react-native';
 import { width } from '../constants/dimensions';
 import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
+import HTMLView from 'react-native-htmlview';
+import { WebView } from 'react-native-webview';
 
 type Details = {
     id: string,
@@ -23,6 +25,7 @@ export default function Details(
 ) {
     const router = useRouter()
     const [ details, SetDetails ] = useState<ItemDetails | null>(null);
+    const [ html, setHTML ] = useState<string>("");
 
     const getDetails = async () => {
         if(!id) router.replace("/");
@@ -43,8 +46,11 @@ export default function Details(
 
     const getData = async() => {
         try {
-            const response = await fetch(`https://www.servaltracker.com/products/PLID${id}/`);
-            const data = await response.text();
+            const response = await fetch(`https://api.buck.cheap/Product/GetAllBySku?sku=${id}&storeId=9`);
+            const items = await response.json();
+            const item = items[0];
+
+            setHTML(item.id)
         } catch(error){
         } finally {
         }
@@ -60,7 +66,7 @@ export default function Details(
             style={styles.container}
         >
             <Text numberOfLines={1} style={styles.title}>{title}</Text>
-            <Text numberOfLines={1} style={styles.price}>{price}</Text>
+            <WebView source={{ uri: `https://buck.cheap/ProductIFrame/${html}` }} />
         </View>
     );
 }
