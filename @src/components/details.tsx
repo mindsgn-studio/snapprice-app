@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, } from 'react-native';
 import { width } from '../constants/dimensions';
 import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
+import HTMLView from 'react-native-htmlview';
+import { WebView } from 'react-native-webview';
 
 type Details = {
     id: string,
@@ -23,6 +25,7 @@ export default function Details(
 ) {
     const router = useRouter()
     const [ details, SetDetails ] = useState<ItemDetails | null>(null);
+    const [ html, setHTML ] = useState<string>("");
 
     const getDetails = async () => {
         if(!id) router.replace("/");
@@ -41,31 +44,29 @@ export default function Details(
         }
     };
 
+    const getData = async() => {
+        try {
+            const response = await fetch(`https://api.buck.cheap/Product/GetAllBySku?sku=${id}&storeId=9`);
+            const items = await response.json();
+            const item = items[0];
+
+            setHTML(item.id)
+        } catch(error){
+        } finally {
+        }
+    }
+
     useEffect(() => {
         getDetails();
+        getData();
     },[]);
 
     return (
         <View
             style={styles.container}
         >
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.price}>{price}</Text>
-            {
-                /*
-                <LineGraph points={[
-                    {
-                        value: 1, date: new Date(),
-                    },
-                    {
-                        value: 5, date: new Date(),
-                    },
-                    {
-                        value: 6, date: new Date(),
-                    }
-                ]} color="#4484B2" animated={false} />
-                */
-            }
+            <Text numberOfLines={1} style={styles.title}>{title}</Text>
+            <WebView source={{ uri: `https://buck.cheap/ProductIFrame/${html}` }} />
         </View>
     );
 }
@@ -79,7 +80,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 28,
-        fontWeight: "bold"
     },
     price: {
         fontSize: 28,

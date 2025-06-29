@@ -22,6 +22,7 @@ export default function RootLayout() {
   const store = useCreateStore(createStore);
   useAndStartPersister(store);
 
+
   return (
     <Provider store={store}>
       <Stack>

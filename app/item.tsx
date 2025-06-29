@@ -33,9 +33,6 @@ export default function ItemScreen() {
         title={title}
         id={id}
       />
-      <View style={styles.bottom}>
-        <Button title={"TRACK ITEM"} onPress={() => {}}/>
-      </View>
     </View>
   );
 }
