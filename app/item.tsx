@@ -1,4 +1,4 @@
-import { View, StyleSheet, ImageBackground } from 'react-native';
+import { View, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 import { useLocalSearchParams  } from "expo-router";
 import { width } from '@/@src/constants/dimensions';
 import Button from '@/@src/components/button';
@@ -21,7 +21,7 @@ export default function ItemScreen() {
   } = data
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ImageBackground
         style={styles.image}
         source={{
@@ -33,7 +33,7 @@ export default function ItemScreen() {
         title={title}
         id={id}
       />
-    </View>
+    </ScrollView>
   );
 }
 

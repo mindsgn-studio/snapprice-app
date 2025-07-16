@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { StyleSheet, View, TextInput, Button } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-native';
 import { useSearch } from '../store/search';
 import { replaceString } from '../hooks/replaceString';
 
@@ -43,8 +43,13 @@ export default function SearchInput() {
                 style={styles.textInput}
                 placeholder='Search any item'
                 onChangeText={(text) => {setsearchText(text)}}
-            /> 
-            <Button title={"Search"} onPress={search}/>
+            />
+            <TouchableOpacity
+                style={styles.button}
+                onPress={search}
+            >
+                <Text style={styles.text}>SEARCH</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -61,13 +66,24 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 80,
         marginBottom: 20,
-        alignSelf: "center"
+        alignSelf: "center",
+        height: 50,
     },
     textInput:{
         flex: 1,
         paddingHorizontal: 10,
     },
     button:{
-        backgroundColor: ""
-    }   
+        backgroundColor: "blue",
+        height: 40,
+        width: 80,
+        borderRadius: 10,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    text: {
+        color: "white",
+        fontWeight: "bold"
+    }
 });
