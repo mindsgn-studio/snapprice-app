@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import HTMLView from 'react-native-htmlview';
 import { WebView } from 'react-native-webview';
+import Button from './button';
+import * as Linking from 'expo-linking';
 
 type Details = {
     id: string,
@@ -14,6 +16,7 @@ type Details = {
 
 type ItemDetails = {
     html?: string,
+
 }
 
 export default function Details(
@@ -26,6 +29,7 @@ export default function Details(
     const router = useRouter()
     const [ details, SetDetails ] = useState<ItemDetails | null>(null);
     const [ html, setHTML ] = useState<string>("");
+    const [ url, setUrl ] = useState<string>("");
 
     const getDetails = async () => {
         if(!id) router.replace("/");
@@ -33,16 +37,25 @@ export default function Details(
         try{
             const response = await fetch(`https://api.takealot.com/rest/v-1-14-0/product-details/PLID${id}?platform=desktop&offer_opt=true&display_credit=true`);
             const data = await response.json();
-            const { description } = data;
+            const { description, sharing } = data;
+            const { url } = sharing;
             const { html } = description
-
+            setUrl(url);
             SetDetails({
-                html
+                html,
             })
         } catch(error){
         } finally {
         }
     };
+
+    const goTo = async () => {
+        try{
+            Linking.openURL(url);
+        } catch (error) {
+        } finally {
+        }
+    }
 
     const getData = async() => {
         try {
@@ -66,7 +79,8 @@ export default function Details(
             style={styles.container}
         >
             <Text numberOfLines={1} style={styles.title}>{title}</Text>
-            <WebView source={{ uri: `https://buck.cheap/ProductIFrame/${html}` }} />
+            <WebView style={styles.graph} source={{ uri: `https://buck.cheap/ProductIFrame/${html}` }} />
+            <Button title='View On TakeAlot' onPress={() => goTo()}/>
         </View>
     );
 }
@@ -80,6 +94,9 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 28,
+    },
+    graph: {
+        height: 300,
     },
     price: {
         fontSize: 28,
