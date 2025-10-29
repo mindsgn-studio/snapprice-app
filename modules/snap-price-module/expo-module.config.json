@@ -1,9 +1,0 @@
-{
-  "platforms": ["apple", "android", "web"],
-  "apple": {
-    "modules": ["SnapPriceModule"]
-  },
-  "android": {
-    "modules": ["mindsgn.studio.snap.price.module.SnapPriceModule"]
-  }
-}
