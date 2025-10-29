@@ -3,18 +3,25 @@ import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-nativ
 import { useSearch } from '@/store/search';
 
 export default function SearchInput() {
-    const { setSearch, clearSearch } = useSearch();
+    const { setSearch, loading, setLoading, clearSearch } = useSearch();
     const [ searchText, setsearchText ] = useState("sony");
 
     const search = async() => {
+        setLoading(loading)
+
         if (searchText === "") return
         clearSearch()
         try {
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/api/search`, {
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/api/search?search=${searchText}`, {
                 method: "GET"
-            })
-            const data = await response.json()
-            console.log(data)
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            const { count, items } = data;
+            setSearch(items)
+            
         }catch (error){
             console.log(error)
             clearSearch()

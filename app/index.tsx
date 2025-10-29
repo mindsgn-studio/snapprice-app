@@ -5,6 +5,7 @@ import { useSQLiteContext } from 'expo-sqlite';
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import * as schema from '@/schema';
 import SearchInput from '@/components/search';
+import Main from '@/components/main';
 
 export default function HomeScreen() {
   const db = useSQLiteContext();
@@ -13,6 +14,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <SearchInput />
+      <Main />
     </View>
   );
 }
