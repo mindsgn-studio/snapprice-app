@@ -22,7 +22,6 @@ const useSearch = create<SearchInterface>((set, get) => ({
   clearSearch: () => set({search: []})
 }));
 
-
 export {
     useSearch
 }
