@@ -1,7 +1,6 @@
 import { View, ScrollView, StyleSheet, ImageBackground } from 'react-native';
 import { useLocalSearchParams  } from "expo-router";
 import { width } from '@/constants/dimensions';
-import Button from '@/components/button';
 import Details from '@/components/details';
 
 interface Item {

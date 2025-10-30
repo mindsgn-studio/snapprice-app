@@ -1,17 +1,25 @@
 import { useRouter } from 'expo-router';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 
+interface Price {
+  ItemID: string,
+  Price: number,
+  Date: Date
+}
+
 type ItemCard = {
     id: string,
     title: string,
-    price: string,
+    price: any,
+    images: [string]
 }
 
 export default function ItemCard(
     {
         id,
         title,
-        price = "R0.00",
+        images,
+        price
     }: ItemCard
 ) {
     const router = useRouter();
@@ -24,21 +32,28 @@ export default function ItemCard(
                     params: { 
                         id, 
                         title,
-                        price
+                        price: price.Price,
+                        image: images[0] 
                      }
                 })
             }}
             style={styles.view}>
-           
+            <Image
+                style={styles.image}
+                source={{
+                    uri: `${images[0]}`,
+                }} 
+            />
             <View>
                 <Text  
                     style={{
-                        width: 150,
+                        width: 200,
+                        fontSize: 25,
                         color: "black"
                     }}
                     numberOfLines={1}
                     ellipsizeMode={"tail"}>{title}</Text>     
-                <Text style={styles.textPrice}>{price}</Text>
+                <Text style={styles.textPrice}>R{price.Price}</Text>
             </View>
         </TouchableOpacity>
     );

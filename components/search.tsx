@@ -4,27 +4,27 @@ import { useSearch } from '@/store/search';
 
 export default function SearchInput() {
     const { setSearch, loading, setLoading, clearSearch } = useSearch();
-    const [ searchText, setsearchText ] = useState("sony");
+    const [ searchText, setsearchText ] = useState("");
 
     const search = async() => {
-        setLoading(loading)
+        setLoading(true)
 
-        if (searchText === "") return
+        if (searchText === ""){
+            setLoading(false)
+            return
+        }
+        
         clearSearch()
         try {
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/api/search?search=${searchText}`, {
-                method: "GET"
-            });
-
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/search?search=${searchText}&page=1&limit=10`);
             const data = await response.json();
-            console.log(data);
-
-            const { count, items } = data;
+            const { items } = data
             setSearch(items)
-            
         }catch (error){
             console.log(error)
             clearSearch()
+        }finally{
+            setLoading(false)
         }
     };
 
