@@ -1,43 +1,53 @@
-import { useEffect, useState } from 'react';
+import {useState } from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import { useSearch } from '@/store/search';
 
 export default function SearchInput() {
-    const { setSearch, loading, setLoading, clearSearch } = useSearch();
+    const { setSearch, setItems, setPagination, setLoading, clearSearch, page, limit } = useSearch();
     const [ searchText, setsearchText ] = useState("");
-
+    
     const search = async() => {
-        setLoading(true)
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+        setLoading(true);
 
-        if (searchText === ""){
-            setLoading(false)
-            return
+        if (searchText === ""){ 
+            setLoading(false);
+            return;
         }
-        
         clearSearch()
+        setSearch(searchText)
         try {
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/search?search=${searchText}&page=1&limit=10`);
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/search?search=${searchText}&page=${page}&limit=${limit}`);
             const data = await response.json();
-            const { items } = data
-            setSearch(items)
+            const { items, hasNext } = data;
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+            if (items == null){
+                clearSearch()
+                return;
+            } 
+            setItems(items)
+            setPagination({
+                page, 
+                hasNext
+            })
         }catch (error){
-            console.log(error)
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
             clearSearch()
         }finally{
-            setLoading(false)
+            setLoading(false);
         }
     };
-
-    useEffect(() => {
-        search()
-    },[]);
 
     return (
         <View style={styles.view}>
             <TextInput
                 style={styles.textInput}
                 placeholder='Search any item'
-                onChangeText={(text) => {setsearchText(text)}}
+                onChangeText={(text) => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
+                    setsearchText(text)
+                }}
             />
             <TouchableOpacity
                 style={styles.button}
@@ -59,6 +69,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 80,
+        paddingVertical: 10,
         marginBottom: 20,
         alignSelf: "center",
         height: 50,
@@ -71,7 +82,7 @@ const styles = StyleSheet.create({
         backgroundColor: "blue",
         height: 40,
         width: 80,
-        borderRadius: 2,
+        borderRadius: 10,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

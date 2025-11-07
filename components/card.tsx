@@ -1,50 +1,58 @@
 import { useRouter } from 'expo-router';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import * as Haptics from 'expo-haptics';
 
 interface Price {
-  ItemID: string,
-  Price: number,
-  Date: Date
+  item_id: string,
+  price: number,
+  date: Date
 }
 
 type ItemCard = {
-    id: string,
+    uuid: string,
+    image: string,
     title: string,
-    price: any,
-    images: [string]
+    source: string
+    prices: [Price]
+    link: string
 }
 
 export default function ItemCard(
     {
-        id,
+        uuid,
+        image,
         title,
-        images,
-        price
+        source,
+        prices,
+        link
     }: ItemCard
 ) {
     const router = useRouter();
 
-    return (    
+    return (
         <TouchableOpacity 
             onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                 router.push({
                     pathname: '/item',
                     params: { 
-                        id, 
+                        uuid, 
                         title,
-                        price: price.Price,
-                        image: images[0] 
-                     }
+                        image,
+                        price: prices[0].price,
+                        source,
+                        link
+                    }
                 })
             }}
             style={styles.view}>
             <Image
                 style={styles.image}
                 source={{
-                    uri: `${images[0]}`,
-                }} 
+                    uri: `${image}`,
+                }}
             />
-            <View>
+             <View>
                 <Text  
                     style={{
                         width: 200,
@@ -52,9 +60,12 @@ export default function ItemCard(
                         color: "black"
                     }}
                     numberOfLines={1}
-                    ellipsizeMode={"tail"}>{title}</Text>     
-                <Text style={styles.textPrice}>R{price.Price}</Text>
-            </View>
+                    ellipsizeMode={"tail"}>{title}
+                </Text>
+                <Text style={styles.textPrice}>
+                    R{prices[0].price}
+                </Text>
+             </View>
         </TouchableOpacity>
     );
 }
@@ -72,8 +83,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     image: {
-        width: 50,
-        height: 50,
+        width: 70,
+        height: 70,
         marginHorizontal: 10,
     },
     textPrice:{
