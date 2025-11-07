@@ -4,20 +4,23 @@ import { FlashList } from "@shopify/flash-list";
 import { useSearch } from '../store/search';
 import { height, width } from '@/constants/dimensions';
 import { EmptyState } from './empty';
+import * as Haptics from "expo-haptics";
+
 
 interface Price {
-  ItemID: string,
-  Price: number,
-  Date: Date
+  item_id: string,
+  price: number,
+  date: Date
 }
 
 interface Item {
-  ID: string,
-  Title: string,
-  Brand: string
-  Images: [string],
-  Link: string,
-  Price: [Price]
+  uuid: string,
+  title: string,
+  brand: string,
+  image: string,
+  price: [Price],
+  source_name: string,
+  link: string,
 }
 
 interface ItemCardInterface {
@@ -25,7 +28,25 @@ interface ItemCardInterface {
 }
 
 export default function Main() {
-    const { search } = useSearch();
+    const { items, page, limit, search, setItems, setPagination, hasNext } = useSearch();
+    
+    const paginate = async() => {
+        if(!hasNext) return
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+        try {
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/search?search=${search}&page=${page}&limit=${limit}`);
+            const data = await response.json();
+            const { items, hasNext } = data;
+            setItems(items)
+            setPagination({
+                page, 
+                hasNext
+            })
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+        } catch (error) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+        }
+    };
 
     return (
         <View style={styles.view}>
@@ -33,25 +54,26 @@ export default function Main() {
                 style={{
                     paddingBottom: 200
                 }}
-                data={search}
-                keyExtractor={(item) => item.ID}
-                renderItem={({ item }: ItemCardInterface) => 
-                    <ItemCard
-                        key={item.ID}
-                        id={item.ID}
-                        title={item.Title}
-                        images={item.Images}
-                        price={item.Price}
-                    />
-                    }
+                data={items}
+                keyExtractor={(item) => item.uuid}
+                renderItem={({ item }: ItemCardInterface) => {
+                    return (
+                        <ItemCard
+                            uuid={item.uuid}
+                            image={item.image}
+                            title={item.title}
+                            source={item.source_name}
+                            link={item.link}
+                            prices={item.price}
+                        />
+                    )
+                }}
                 ListEmptyComponent={
                     <EmptyState />
                 }
                 contentContainerStyle={{ paddingBottom: 40 }}
                 onEndReachedThreshold={0.5}
-                onEndReached={() => {
-                    
-                }}
+                onEndReached={paginate}
             />
         </View>
     );

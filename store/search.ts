@@ -1,39 +1,56 @@
 import { create } from 'zustand'
 
 interface Price {
-  ItemID: string,
-  Price: number,
-  Date: Date
+  Item_id: string,
+  price: number,
+  date: Date
 }
 
-interface Search {
-  ID: string,
-  Title: string,
-  Brand: string,
-  Images: [string],
-  Link: string,
-  Price: [Price]
+interface Item {
+  uuid: string,
+  title: string,
+  brand: string,
+  image: string,
+  price: [Price],
+  source_name: string,
+  link: string,
 }
 
 interface SearchInterface {
-  search: Search[],
+  search: string,
+  items: Item[],
   loading: boolean,
+  page: number,
+  limit: number,
+  hasNext: boolean,
   setLoading: (loading: boolean) => void,
-  setSearch: (search: Search) => void,
+  setPagination: ({page, hasNext}:{page: number, hasNext: boolean}) => void,
+  setItems: (search: [Item]) => void,
+  setSearch: (text: string) => void,
   clearSearch: () => void
 }
 
 const useSearch = create<SearchInterface>((set, get) => ({
-  search: [],
+  items: [],
+  search: "",
   loading: false,
+  page: 1,
+  hasNext: false,
+  limit: 10,
   setLoading: (loading: boolean) => {
     set({ loading: loading })
   },
-  setSearch: (search: Search) => {
-    const oldSearch = get().search;
-    set({ search: [...oldSearch, ...search], loading: false });
+  setSearch: (text: string) => {
+    set({search: text, page: 1})
   },
-  clearSearch: () => set({search: []})
+  setPagination: ({page, hasNext}:{page: number, hasNext: boolean}) => {
+    set({page: page +1, hasNext});
+  },
+  setItems: (items: [Item]) => {
+    const oldItems = get().items;
+    set({ items: [...oldItems, ...items], loading: false });
+  },
+  clearSearch: () => set({items: [], page: 1})
 }));
 
 export {

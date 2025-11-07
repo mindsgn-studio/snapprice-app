@@ -3,22 +3,31 @@ import { useLocalSearchParams  } from "expo-router";
 import { width } from '@/constants/dimensions';
 import Details from '@/components/details';
 
+interface Sources {
+  ID: string,
+  Source: String
+}
+
 interface Item {
   id: string,
   title: string,
   image: string,
-  price: string
+  price: string,
+  source: string
+  link: string
 }
 
 export default function ItemScreen() {
   const data = useLocalSearchParams<any | Item>();
   const {
-    id,
+    uuid,
     title,
     image,
-    price
+    price,
+    source,
+    link
   } = data
-
+  
   return (
     <ScrollView style={styles.container}>
       <ImageBackground
@@ -30,7 +39,9 @@ export default function ItemScreen() {
       <Details 
         price={price}
         title={title}
-        id={id}
+        uuid={uuid}
+        source={source}
+        link={link}
       />
     </ScrollView>
   );
