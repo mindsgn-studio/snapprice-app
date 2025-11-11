@@ -5,8 +5,9 @@ import { width } from '../constants/dimensions';
 type Button = {
     title: string,
     onPress: () => void,
-    outline?: boolean
-    loading?: boolean
+    outline?: boolean,
+    loading?: boolean,
+    type?: "normal"
 }
 
 export default function Button(
@@ -14,13 +15,17 @@ export default function Button(
         title,
         onPress,
         outline = false,
-        loading = false
+        loading = false,
+        type = "normal"
     }: Button
 ) {
     return (
         <TouchableOpacity 
             onPress={onPress}
-            style={[styles.container, outline? styles.outline : null]}
+            style={[
+                styles.container, 
+                outline? styles.outline : null,
+            ]}
         >
             {
                 loading?

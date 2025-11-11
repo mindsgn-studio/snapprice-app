@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `items_uuid_unique` ON `items` (`uuid`);

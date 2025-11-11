@@ -4,7 +4,7 @@ import * as Haptics from 'expo-haptics';
 import { useSearch } from '@/store/search';
 
 export default function SearchInput() {
-    const { setSearch, setItems, setPagination, setLoading, clearSearch, page, limit } = useSearch();
+    const { setSearch, setItems, setPagination, setLoading, clearSearch, page, limit, setToast } = useSearch();
     const [ searchText, setsearchText ] = useState("");
     
     const search = async() => {
@@ -13,6 +13,7 @@ export default function SearchInput() {
 
         if (searchText === ""){ 
             setLoading(false);
+            setToast()
             return;
         }
         clearSearch()
@@ -26,6 +27,7 @@ export default function SearchInput() {
                 clearSearch()
                 return;
             } 
+            setToast()
             setItems(items)
             setPagination({
                 page, 
@@ -34,6 +36,7 @@ export default function SearchInput() {
         }catch (error){
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
             clearSearch()
+            setToast()
         }finally{
             setLoading(false);
         }
@@ -70,13 +73,19 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 80,
         paddingVertical: 10,
+        paddingHorizontal: 2,
         marginBottom: 20,
         alignSelf: "center",
         height: 50,
+        borderWidth: 2,
+        borderColor: "blue"
+        
     },
     textInput:{
         flex: 1,
         paddingHorizontal: 10,
+        fontWeight: "bold",
+        fontSize: 21
     },
     button:{
         backgroundColor: "blue",
