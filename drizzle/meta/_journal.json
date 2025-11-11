@@ -43,6 +43,13 @@
       "when": 1762848956256,
       "tag": "0005_sudden_gwen_stacy",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1762851246634,
+      "tag": "0006_woozy_kulan_gath",
+      "breakpoints": true
     }
   ]
 }

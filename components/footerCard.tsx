@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
-import { Text, StyleSheet, Dimensions } from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { useSearch } from '@/store/search';
+import { useEffect } from 'react';
+import { StyleSheet, Dimensions } from 'react-native';
+import Animated, { useSharedValue } from 'react-native-reanimated';
 import Button from './button';
 import * as Haptics from "expo-haptics"
 import { useSQLiteContext } from 'expo-sqlite';
@@ -12,24 +11,39 @@ import { useRouter } from 'expo-router';
 
 const FooterCard = () => {
     const router = useRouter();
-    const bottom = useSharedValue(100);
+    const bottom = useSharedValue(50);
     const db = useSQLiteContext();
     const drizzleDb = drizzle(db, { schema});
-    const { data } = useLiveQuery(drizzleDb.select().from(schema.items))
-    console.log(data)
+    const { data } = useLiveQuery(drizzleDb.select().from(schema.items));
+    
+    const handlePress = () => {
+        if(data.length === 0){
+            bottom.value = -100;
+        }else{
+            bottom.value = 20;
+        }
+    };
+
+    useEffect(() => {
+        handlePress()
+    },[data])
 
     return (
         <Animated.View style={[
                 styles.container,
+                {
+                    bottom
+                }
             ]}>
             <Button
+                testID='list-button'
                 title={"View My List"}
                 onPress={() => {
                     try {
                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                        router.push("/list")
+                        router.push("/list");
                     } catch (error){
-
+                        console.log(error);
                     }
                 }}
             />
@@ -43,7 +57,6 @@ const styles = StyleSheet.create({
         width: Dimensions.get("screen").width - 20,
         backgroundColor: "",
         position: "absolute",
-        bottom: 50,
         alignSelf: "center",
         paddingVertical: 10,
         paddingHorizontal: 20,

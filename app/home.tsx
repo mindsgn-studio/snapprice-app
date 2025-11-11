@@ -1,16 +1,22 @@
 
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { StyleSheet } from 'react-native';
 import { useSQLiteContext } from 'expo-sqlite';
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import * as schema from '@/schema';
-import { useEffect } from 'react';
-import List from '@/components/list';
+import SearchInput from '@/components/search';
+import Main from '@/components/main';
+import FooterCard from '@/components/footerCard';
 
 export default function HomeScreen() {
+  const db = useSQLiteContext();
+  const drizzleDb = drizzle(db, { schema});
+  
   return (
     <View style={styles.container}>
-      <List />
+      <SearchInput />
+      <Main />
+      <FooterCard />
     </View>
   );
 }
@@ -18,6 +24,5 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 40,
   },
 });

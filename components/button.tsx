@@ -7,7 +7,8 @@ type Button = {
     onPress: () => void,
     outline?: boolean,
     loading?: boolean,
-    type?: "normal"
+    type?: "normal",
+    testID: string
 }
 
 export default function Button(
@@ -16,11 +17,13 @@ export default function Button(
         onPress,
         outline = false,
         loading = false,
-        type = "normal"
+        type = "normal",
+        testID="button"
     }: Button
 ) {
     return (
         <TouchableOpacity 
+            testID={testID}
             onPress={onPress}
             style={[
                 styles.container, 
@@ -31,9 +34,8 @@ export default function Button(
                 loading?
                 <ActivityIndicator />
                 :
-                <Text  style={[styles.text, outline? styles.outlineText : null]}>{title}</Text>
+                <Text style={[styles.text, outline? styles.outlineText : null]}>{title}</Text>
             }
-            
         </TouchableOpacity>
     );
 }

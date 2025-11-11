@@ -23,7 +23,6 @@ export default function ItemScreen() {
     uuid,
     title,
     image,
-    price,
     source,
     link
   } = data
@@ -36,8 +35,7 @@ export default function ItemScreen() {
           uri: `${image}`,
         }}
       />
-      <Details 
-        price={price}
+      <Details
         title={title}
         image={image}
         uuid={uuid}

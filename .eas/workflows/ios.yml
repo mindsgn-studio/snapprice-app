@@ -5,7 +5,7 @@ on:
     branches: ['*']
 
 jobs:
-  build_android_for_e2e:
+  build_ios_for_e2e:
     type: build
     params:
       platform: ios

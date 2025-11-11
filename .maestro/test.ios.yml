@@ -1,3 +1,8 @@
 appId: mindsgn.studio.snap-price
 ---
 - launchApp
+- tapOn:
+    id: "search-input"
+- inputText: "sony"
+- tapOn:
+    id: "search-button"

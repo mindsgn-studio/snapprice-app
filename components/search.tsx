@@ -45,6 +45,7 @@ export default function SearchInput() {
     return (
         <View style={styles.view}>
             <TextInput
+                testID={"search-input"}
                 style={styles.textInput}
                 placeholder='Search any item'
                 onChangeText={(text) => {
@@ -53,6 +54,7 @@ export default function SearchInput() {
                 }}
             />
             <TouchableOpacity
+                testID={"search-button"}
                 style={styles.button}
                 onPress={search}
             >
