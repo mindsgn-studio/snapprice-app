@@ -13,8 +13,14 @@ export const prices = sqliteTable('prices', {
     id: integer('id').primaryKey({ autoIncrement: true }),
     uuid: text('uuid').notNull(),
     price: integer('price').notNull(),
-    date: text('date').notNull(),
+    date: text('date').notNull().unique(),
+});
+
+export const user = sqliteTable('user', {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    uuid: text('uuid').notNull(),
 });
 
 export type Items = typeof items.$inferSelect;
 export type Prices = typeof prices.$inferSelect;
+export type User = typeof user.$inferSelect;

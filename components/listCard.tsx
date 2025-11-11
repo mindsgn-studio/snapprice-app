@@ -14,7 +14,6 @@ type ListCard = {
     title: string,
     link: string,
     source: string,
-    price: number
 }
 
 export default function ListCard(
@@ -55,7 +54,7 @@ export default function ListCard(
                 <Text  
                     style={{
                         width: 200,
-                        fontSize: 25,
+                        fontSize: 36,
                         color: "black"
                     }}
                     numberOfLines={1}

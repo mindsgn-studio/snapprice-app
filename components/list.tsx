@@ -20,7 +20,7 @@ interface Item {
   brand: string,
   image: string,
   price: [Price],
-  source_name: string,
+  source: string,
   link: string,
 }
 
@@ -47,8 +47,7 @@ export default function List() {
                             uuid={item.uuid}
                             image={item.image}
                             title={item.title}
-                            price={item.price[0].price}
-                            source={item.source_name}
+                            source={item.source}
                             link={item.link}
                         />
                     )

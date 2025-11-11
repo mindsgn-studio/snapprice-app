@@ -12,9 +12,14 @@ import { useSQLiteContext } from 'expo-sqlite';
 import * as schema from "@/schema"
 import { eq } from 'drizzle-orm';
 
+interface Price {
+    date: Date,
+    item_id: string,
+    price: number
+}
+
 type Details = {
     uuid: string,
-    price: string,
     title: string,
     source: string,
     image: string,
@@ -24,7 +29,6 @@ type Details = {
 export default function Details(
     {
         uuid,
-        price,
         image,
         title = "",
         source,
@@ -32,17 +36,16 @@ export default function Details(
     }: Details
 ) {
     const db = useSQLiteContext();
-    const drizzleDb = drizzle(db, { schema});
-
+    const drizzleDb = drizzle(db, {schema});
+    
     const router = useRouter()
-    const [ prices, setPrice ] = useState<number | null>(null);
     const [ priceData, setPriceData ] = useState<any>({
+        current: 0,
         highest: 0,
         lowest: 0
     });
-    const [ priceHistoryList,setPriceHistoryListList ] = useState<number []>([]);
+    const [ priceHistoryList,setPriceHistoryListList ] = useState<Price []>([]);
     const [ tracked, setTracked ] = useState<boolean>(false);
-    const [ added, setAdd ] = useState(true);
     const [ loadding, setLoading ] = useState(true);
 
     const priceHistory = useMemo(() => {
@@ -54,23 +57,26 @@ export default function Details(
         try{
             const response = await fetch(`${process.env.EXPO_PUBLIC_API}/item/${uuid}`);
             const data = await response.json();
-            const{ highest, lowest } = data
+            const{ highest, lowest, pricesHistory, current } = data
+            setPriceHistoryListList(pricesHistory)
             setPriceData({
+                current,
                 highest,
                 lowest
-            })
-            const list: number [] = []
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+            });
+            const list: number [] = [];
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         } catch(error){
-            
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+            router.back();
         }
     };
 
     const getStatus = async () => {
+        const userData  = await drizzleDb.select().from(schema.user)
         if(!uuid) router.replace("/");
         try{
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/test`, {
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/${userData[0].uuid}`, {
                 method: "GET"
             });
             const data = await response.json();
@@ -79,16 +85,17 @@ export default function Details(
                 setTracked(true)
             }
         } catch(error){
-           
+            console.log(error)
         }finally{
             setLoading(false)
         }
     };
 
     const trackProduct = async() => {
+        const userData  = await drizzleDb.select().from(schema.user)
         setLoading(true)
         try {
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/test`, {
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/${userData[0].uuid}`, {
                 method: "POST"
             });
             const data = await response.json();
@@ -96,36 +103,43 @@ export default function Details(
     
             if (added) {
                 setTracked(true)
-                const result = await drizzleDb.insert(schema.items).values({
+                await drizzleDb.insert(schema.items).values({
                     uuid,
                     image,
                     title,
-                    link
+                    link,
+                    source
                 });
 
-                console.log(result)
+                priceHistory.map(async(price: Price) => {
+                    await drizzleDb.insert(schema.prices).values({
+                        uuid: price.item_id,
+                        date: `${price.date}`,
+                        price: price.price
+                    });
+                })
             }
-        }
-        catch (error) {
+        } catch (error) {
            console.log(error)
-        }finally{
+        } finally {
             setLoading(false)
         }
     }
 
     const removeProduct = async() => {
+        const userData  = await drizzleDb.select().from(schema.user)
          setLoading(true)
         try{
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/test`, {
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/${userData[0].uuid}`, {
                 method: "DELETE"
             });
 
-            const data = await response.json();
-            console.log(data)
+            await response.json();
             
             setTracked(false)
-            const result = await drizzleDb.delete(schema.items).where(eq(schema.items.uuid, uuid));
-            console.log(result);
+            await drizzleDb.delete(schema.items).where(eq(schema.items.uuid, uuid));
+            await drizzleDb.delete(schema.prices).where(eq(schema.prices.uuid, uuid));
+
         } catch (error){
             console.log("start", error)
         } finally {
@@ -146,10 +160,11 @@ export default function Details(
            
             <View style={styles.row}> 
                 <View>
-                    <Text numberOfLines={1} style={styles.price}>R {price}</Text>
+                    <Text numberOfLines={1} style={styles.price}>R {priceData.current}</Text>
                 </View>
                 <View>
                     <Text>Lowest: R {priceData.lowest}</Text>
+                    <Text>Average: R {priceData.highest}</Text>
                     <Text>Highest: R {priceData.highest}</Text>
                 </View>
             </View>
@@ -160,11 +175,12 @@ export default function Details(
             />
             <View>
                 <Button
+                    testID='add-button'
                     loading={loadding}
                     title={tracked? 'Remove Product' : 'Track Product'} 
                     onPress={tracked ? removeProduct : trackProduct}
                 /> 
-                <Button title={`View On ${source}`} onPress={async() => {
+                <Button testID='browser-button' title={`View On ${source}`} onPress={async() => {
                     await WebBrowser.openBrowserAsync(link);
                 }} outline={true}/>
             </View>
