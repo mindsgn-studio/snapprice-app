@@ -7,12 +7,17 @@ import Button from './button';
 import { Graph } from '@/components/graph';
 import * as Haptics from 'expo-haptics';
 import * as WebBrowser from 'expo-web-browser';
+import { drizzle } from 'drizzle-orm/expo-sqlite'
+import { useSQLiteContext } from 'expo-sqlite';
+import * as schema from "@/schema"
+import { eq } from 'drizzle-orm';
 
 type Details = {
     uuid: string,
     price: string,
     title: string,
     source: string,
+    image: string,
     link: string
 };
 
@@ -20,11 +25,15 @@ export default function Details(
     {
         uuid,
         price,
+        image,
         title = "",
         source,
         link
     }: Details
 ) {
+    const db = useSQLiteContext();
+    const drizzleDb = drizzle(db, { schema});
+
     const router = useRouter()
     const [ prices, setPrice ] = useState<number | null>(null);
     const [ priceData, setPriceData ] = useState<any>({
@@ -32,7 +41,7 @@ export default function Details(
         lowest: 0
     });
     const [ priceHistoryList,setPriceHistoryListList ] = useState<number []>([]);
-    const [ url, setUrl ] = useState<string>("");
+    const [ tracked, setTracked ] = useState<boolean>(false);
     const [ added, setAdd ] = useState(true);
     const [ loadding, setLoading ] = useState(true);
 
@@ -58,20 +67,75 @@ export default function Details(
         }
     };
 
+    const getStatus = async () => {
+        if(!uuid) router.replace("/");
+        try{
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/test`, {
+                method: "GET"
+            });
+            const data = await response.json();
+            const {added} = data;
+            if(added){
+                setTracked(true)
+            }
+        } catch(error){
+           
+        }finally{
+            setLoading(false)
+        }
+    };
+
     const trackProduct = async() => {
+        setLoading(true)
         try {
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}`, {
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/test`, {
                 method: "POST"
             });
             const data = await response.json();
-        }   
+            const {added} = data;
+    
+            if (added) {
+                setTracked(true)
+                const result = await drizzleDb.insert(schema.items).values({
+                    uuid,
+                    image,
+                    title,
+                    link
+                });
+
+                console.log(result)
+            }
+        }
         catch (error) {
-           
+           console.log(error)
+        }finally{
+            setLoading(false)
+        }
+    }
+
+    const removeProduct = async() => {
+         setLoading(true)
+        try{
+            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/test`, {
+                method: "DELETE"
+            });
+
+            const data = await response.json();
+            console.log(data)
+            
+            setTracked(false)
+            const result = await drizzleDb.delete(schema.items).where(eq(schema.items.uuid, uuid));
+            console.log(result);
+        } catch (error){
+            console.log("start", error)
+        } finally {
+            setLoading(false)
         }
     }
     
     useEffect(() => {
         getDetails();
+        getStatus();
     },[]); 
 
     return (
@@ -80,7 +144,7 @@ export default function Details(
         >
             <Text numberOfLines={1} style={styles.title}>{title}</Text>
            
-            <View style={styles.row}>
+            <View style={styles.row}> 
                 <View>
                     <Text numberOfLines={1} style={styles.price}>R {price}</Text>
                 </View>
@@ -89,17 +153,17 @@ export default function Details(
                     <Text>Highest: R {priceData.highest}</Text>
                 </View>
             </View>
-            <Graph 
+            <Graph
                 prices={[]}
                 canvasHeight={200}
                 canvasWidth={100}
             />
             <View>
-                {
-                    /*
-                    <Button title={'Track Product'} onPress={trackProduct} />
-                    */
-                }
+                <Button
+                    loading={loadding}
+                    title={tracked? 'Remove Product' : 'Track Product'} 
+                    onPress={tracked ? removeProduct : trackProduct}
+                /> 
                 <Button title={`View On ${source}`} onPress={async() => {
                     await WebBrowser.openBrowserAsync(link);
                 }} outline={true}/>

@@ -1,10 +1,12 @@
 import { StyleSheet, View } from 'react-native';
-import ItemCard from '@/components/card';
+import ListCard from '@/components/listCard';
 import { FlashList } from "@shopify/flash-list";
-import { useSearch } from '../store/search';
 import { height, width } from '@/constants/dimensions';
 import { EmptyState } from './empty';
-import * as Haptics from "expo-haptics";
+import { useSQLiteContext } from 'expo-sqlite';
+import { drizzle } from 'drizzle-orm/expo-sqlite';
+import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
+import * as schema from "@/schema"
 
 interface Price {
   item_id: string,
@@ -26,53 +28,39 @@ interface ItemCardInterface {
     item: Item
 }
 
-export default function Main() {
-    const { items, page, limit, search, setItems, setPagination, hasNext } = useSearch();
+export default function List() {
+    const db = useSQLiteContext();
+    const drizzleDb = drizzle(db, { schema});
+    const { data } = useLiveQuery(drizzleDb.select().from(schema.items))
     
-    const paginate = async() => {
-        if(!hasNext) return
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
-        try {
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/search?search=${search}&page=${page}&limit=${limit}`);
-            const data = await response.json();
-            const { items, hasNext } = data;
-            setItems(items)
-            setPagination({
-                page, 
-                hasNext
-            })
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-        } catch (error) {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
-        }
-    };
-
     return (
         <View style={styles.view}>
             <FlashList
                 style={{
                     paddingBottom: 200
                 }}
-                data={items}
+                data={data}
                 keyExtractor={(item) => item.uuid}
                 renderItem={({ item }: ItemCardInterface) => {
                     return (
-                        <ItemCard
+                        <ListCard
                             uuid={item.uuid}
                             image={item.image}
                             title={item.title}
+                            price={item.price[0].price}
                             source={item.source_name}
                             link={item.link}
-                            prices={item.price}
                         />
                     )
                 }}
                 ListEmptyComponent={
-                    <EmptyState />
+                    <EmptyState 
+                        title={"Nothing Here Yet"}
+                        message={"Add your first item and let the magic happen"}
+                    />
                 }
                 contentContainerStyle={{ paddingBottom: 40 }}
                 onEndReachedThreshold={0.5}
-                onEndReached={paginate}
             />
         </View>
     );

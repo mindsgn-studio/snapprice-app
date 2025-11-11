@@ -8,6 +8,41 @@
       "when": 1761745047290,
       "tag": "0000_wakeful_leech",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1762779495344,
+      "tag": "0001_sad_human_cannonball",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1762780634765,
+      "tag": "0002_tiny_titanium_man",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1762781813931,
+      "tag": "0003_previous_hiroim",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1762782254833,
+      "tag": "0004_illegal_stardust",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1762848956256,
+      "tag": "0005_sudden_gwen_stacy",
+      "breakpoints": true
     }
   ]
 }

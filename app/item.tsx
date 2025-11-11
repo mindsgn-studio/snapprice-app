@@ -39,6 +39,7 @@ export default function ItemScreen() {
       <Details 
         price={price}
         title={title}
+        image={image}
         uuid={uuid}
         source={source}
         link={link}
