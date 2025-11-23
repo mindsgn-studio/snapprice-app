@@ -2,17 +2,19 @@
   "expo": {
     "name": "snap-price",
     "slug": "snap-price",
-    "version": "0.0.10",
+    "version": "0.0.13",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "snap-price",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      
       "supportsTablet": false,
       "bundleIdentifier": "mindsgn.studio.snap-price",
-      "buildNumber": "10",
+      "buildNumber": "12",
       "infoPlist": {
+        "UIBackgroundModes": ["fetch"],
         "ITSAppUsesNonExemptEncryption": false
       },
       "appleTeamId": "B3U8UM2966"
@@ -26,7 +28,8 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "mindsgn.studio.snap.price"
+      "package": "mindsgn.studio.snap.price",
+      "googleServicesFile": "./google-services.json"
     },
     "plugins": [
       "expo-notifications",
@@ -74,7 +77,18 @@
           }
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/heavy.otf",
+            "./assets/fonts/bold.otf",
+            "./assets/fonts/meduim.otf",
+            "./assets/fonts/regular.otf"
+          ]
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true,

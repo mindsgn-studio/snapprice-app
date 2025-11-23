@@ -36,7 +36,10 @@ export default function Main() {
             const response = await fetch(`${process.env.EXPO_PUBLIC_API}/search?search=${search}&page=${page}&limit=${limit}`);
             const data = await response.json();
             const { items, hasNext } = data;
-            setItems(items)
+            
+            const filtered = items.filter(item => item.price !== null);
+
+            setItems(filtered)
             setPagination({
                 page, 
                 hasNext

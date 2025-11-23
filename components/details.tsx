@@ -4,13 +4,13 @@ import { width } from '../constants/dimensions';
 import { useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import Button from './button';
-import { Graph } from '@/components/graph';
 import * as Haptics from 'expo-haptics';
-import * as WebBrowser from 'expo-web-browser';
 import { drizzle } from 'drizzle-orm/expo-sqlite'
 import { useSQLiteContext } from 'expo-sqlite';
 import * as schema from "@/schema"
-import { eq } from 'drizzle-orm';
+import { Platform } from 'react-native';
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 
 interface Price {
     date: Date,
@@ -21,10 +21,53 @@ interface Price {
 type Details = {
     uuid: string,
     title: string,
+    brand: string,
     source: string,
     image: string,
-    link: string
+    link: string,
+    price: number
 };
+
+
+async function registerForPushNotificationsAsync() {
+    let token;
+
+    if (Platform.OS === 'android') {
+        await Notifications.setNotificationChannelAsync('myNotificationChannel', {
+            name: 'A channel is needed for the permissions prompt to appear',
+            importance: Notifications.AndroidImportance.MAX,
+            vibrationPattern: [0, 250, 250, 250],
+            lightColor: '#FF231F7C',
+        });
+    }
+        const { status: existingStatus } = await Notifications.getPermissionsAsync();
+        let finalStatus = existingStatus;
+
+        if (existingStatus !== 'granted') {
+            const { status } = await Notifications.requestPermissionsAsync();
+            finalStatus = status;
+        }
+
+        if (finalStatus !== 'granted') {
+            return "null";
+        }
+        
+        try {
+
+            const projectId = Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
+            if (!projectId) {
+                throw new Error('Project ID not found');
+            }
+            
+            token = (
+                await Notifications.getExpoPushTokenAsync({projectId})
+            ).data;
+
+        } catch (e) {
+            token = `${e}`;
+        }
+  return token;
+}
 
 export default function Details(
     {
@@ -32,7 +75,9 @@ export default function Details(
         image,
         title = "",
         source,
-        link
+        link,
+        price,
+        brand
     }: Details
 ) {
     const db = useSQLiteContext();
@@ -44,9 +89,15 @@ export default function Details(
         highest: 0,
         lowest: 0
     });
+    const [ prices, setPrices ] = useState<number []>([])
     const [ priceHistoryList,setPriceHistoryListList ] = useState<Price []>([]);
     const [ tracked, setTracked ] = useState<boolean>(false);
     const [ loadding, setLoading ] = useState(true);
+    const [expoPushToken, setExpoPushToken] = useState('');
+    const [channels, setChannels] = useState<Notifications.NotificationChannel[]>([]);
+    const [notification, setNotification] = useState<Notifications.Notification | undefined>(
+        undefined
+    );
 
     const priceHistory = useMemo(() => {
         return priceHistoryList;
@@ -54,27 +105,30 @@ export default function Details(
 
     const getDetails = async () => {
         if(!uuid) router.replace("/");
-        try{
+        try{            
             const response = await fetch(`${process.env.EXPO_PUBLIC_API}/item/${uuid}`);
             const data = await response.json();
-            const{ highest, lowest, pricesHistory, current } = data
+            
+            const{ highest, lowest, pricesHistory, current, previous, change } = data
             setPriceHistoryListList(pricesHistory)
             setPriceData({
                 current,
                 highest,
-                lowest
+                lowest,
+                pricesHistory
             });
             const list: number [] = [];
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         } catch(error){
+            console.log(error)
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-            router.back();
+            //router.back();
         }
     };
 
     const getStatus = async () => {
         const userData  = await drizzleDb.select().from(schema.user)
-        if(!uuid) router.replace("/");
+        // if(!uuid) router.replace("/");
         try{
             const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/${userData[0].uuid}`, {
                 method: "GET"
@@ -93,14 +147,24 @@ export default function Details(
 
     const trackProduct = async() => {
         const userData  = await drizzleDb.select().from(schema.user)
-        setLoading(true)
+        setLoading(true);       
         try {
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/${userData[0].uuid}`, {
+            let token = await registerForPushNotificationsAsync()
+            let link = `${process.env.EXPO_PUBLIC_API}/track/${uuid}/${userData[0].uuid}`
+            
+            if(token!="null"){
+                const device = Platform.OS
+                Notifications.requestPermissionsAsync();
+                token = (await Notifications.getDevicePushTokenAsync()).data;
+                link = `${process.env.EXPO_PUBLIC_API}/track/${uuid}/${userData[0].uuid}/${token}/${device}`
+            }
+            
+            const response = await fetch(link, {
                 method: "POST"
             });
             const data = await response.json();
             const {added} = data;
-    
+            
             if (added) {
                 setTracked(true)
                 await drizzleDb.insert(schema.items).values({
@@ -108,16 +172,11 @@ export default function Details(
                     image,
                     title,
                     link,
-                    source
+                    source,
+                    brand
                 });
 
-                priceHistory.map(async(price: Price) => {
-                    await drizzleDb.insert(schema.prices).values({
-                        uuid: price.item_id,
-                        date: `${price.date}`,
-                        price: price.price
-                    });
-                })
+                router.replace("/item")
             }
         } catch (error) {
            console.log(error)
@@ -125,31 +184,21 @@ export default function Details(
             setLoading(false)
         }
     }
-
-    const removeProduct = async() => {
-        const userData  = await drizzleDb.select().from(schema.user)
-         setLoading(true)
-        try{
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/track/${uuid}/${userData[0].uuid}`, {
-                method: "DELETE"
-            });
-
-            await response.json();
-            
-            setTracked(false)
-            await drizzleDb.delete(schema.items).where(eq(schema.items.uuid, uuid));
-            await drizzleDb.delete(schema.prices).where(eq(schema.prices.uuid, uuid));
-
-        } catch (error){
-            console.log("start", error)
-        } finally {
-            setLoading(false)
-        }
-    }
     
     useEffect(() => {
+        let data: number [] = []
+
+        priceHistory.map((item) => {
+            data.push(item.price)    
+        })
+
+        setPrices(data)
+
+    },[priceHistory]); 
+
+    useEffect(() => {
         getDetails();
-        getStatus();
+        getStatus();    
     },[]); 
 
     return (
@@ -157,32 +206,19 @@ export default function Details(
             style={styles.container}
         >
             <Text numberOfLines={1} style={styles.title}>{title}</Text>
+            <Text numberOfLines={1}>{brand}</Text>
            
             <View style={styles.row}> 
-                <View>
-                    <Text numberOfLines={1} style={styles.price}>R {priceData.current}</Text>
-                </View>
-                <View>
-                    <Text>Lowest: R {priceData.lowest}</Text>
-                    <Text>Average: R {priceData.highest}</Text>
-                    <Text>Highest: R {priceData.highest}</Text>
-                </View>
+                <Text numberOfLines={1} style={styles.price}>R {price}</Text>
             </View>
-            <Graph
-                prices={[]}
-                canvasHeight={200}
-                canvasWidth={100}
-            />
+ 
             <View>
                 <Button
                     testID='add-button'
                     loading={loadding}
-                    title={tracked? 'Remove Product' : 'Track Product'} 
-                    onPress={tracked ? removeProduct : trackProduct}
-                /> 
-                <Button testID='browser-button' title={`View On ${source}`} onPress={async() => {
-                    await WebBrowser.openBrowserAsync(link);
-                }} outline={true}/>
+                    title={'Track Product'} 
+                    onPress={trackProduct}
+                />
             </View>
         </View>
     );

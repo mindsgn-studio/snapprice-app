@@ -1,128 +1,167 @@
-import { type FC, memo } from 'react';
-
+import React, {useEffect, useState} from 'react';
+import {Canvas, Path, Skia} from '@shopify/react-native-skia';
+import {curveBasis, line, scaleLinear, scalePoint} from 'd3';
 import {
-  Canvas,
-  CornerPathEffect,
-  DashPathEffect,
-  Line,
-  Path,
-  Skia,
-  vec,
-} from '@shopify/react-native-skia';
-import { useDerivedValue, withSpring } from 'react-native-reanimated';
-import { StyleSheet, View, Text } from 'react-native';
-import type { StyleProp, ViewStyle } from 'react-native';
+  SharedValue,
+  clamp,
+  runOnJS,
+  useSharedValue,
+  withDelay,
+  withTiming,
+} from 'react-native-reanimated';
+import {
+  Gesture,
+  GestureDetector,
+  PanGestureHandlerEventPayload,
+} from 'react-native-gesture-handler';
+import XAxisText from './x-axis-text';
+import Cursor from './cursor';
+import {getYForX, parse} from 'react-native-redash';
+import Gradient from './gradient';
 
-type GraphProps = {
-  prices: number[];
-  canvasWidth: number;
-  canvasHeight: number;
-  style?: StyleProp<ViewStyle>;
-  padding?: number;
-  lineScore?: number;
-  maxValue?: number;
+export type DataType = {
+  item_id: string;
+  date: string;
+  price: number;
 };
 
-const Palette = {
-  baseGray05: '#E5E2DC',
-  baseGray80: '#30302E',
-  primary: '#8A40FF',
-  background: '#F1EEE8',
+type Props = {
+  chartWidth: number;
+  chartHeight: number;
+  chartMargin: number;
+  data: DataType[];
+  setSelectedDate: React.Dispatch<React.SetStateAction<string>>;
+  selectedValue: SharedValue<number>;
 };
 
-const Graph: FC<GraphProps> = memo(
-  ({
-    prices,
-    canvasHeight: height,
-    canvasWidth: width,
-    style,
-    padding = 0,
-    lineScore = -10,
-    maxValue = 100,
-  }) => {
-    const canvasWidth = width - padding * 2;
+const LineChart = ({
+  chartHeight,
+  chartMargin,
+  chartWidth,
+  data,
+  setSelectedDate,
+  selectedValue,
+}: Props) => {
+  const [showCursor, setShowCursor] = useState(false);
+  const animationLine = useSharedValue(0);
+  const animationGradient = useSharedValue({x: 0, y: 0});
+  const cx = useSharedValue(20);
+  const cy = useSharedValue(0);
 
-    const refactoredMax = maxValue + 10;
-
-    const dashedLineScore = lineScore;
-
-    const lineY = (1 - dashedLineScore / refactoredMax) * height;
-
-    const rRawScores = useDerivedValue(() => {
-      return withSpring(prices);
-    }, [prices]);
-
-    const rScores = useDerivedValue(() => {
-      return rRawScores.value.map(prices => prices / refactoredMax);
-    }, []);
-
-    const rGraphPath = useDerivedValue(() => {
-      const distance = canvasWidth / (rScores.value.length - 1);
-
-      const path = Skia.Path.Make();
-
-      path.moveTo(padding, (1 - rScores.value[0]) * height);
-      for (let i = 0; i < rScores.value.length; i++) {
-        const score = rScores.value[i];
-
-        path.lineTo(padding + distance * i, height * (1 - score));
-      }
-      return path;
-    }, [padding, rScores, prices]);
-
-    if(prices.length===0){
-      return(
-         <View style={[
-          styles.container, 
-          {
-            height
-          }]}>
-          <Text>Not enough Data</Text>
-        </View>
-      )
-    }
-
-    return (
-      <Canvas
-        style={[
-          {
-            width: width,
-            height: height,
-          },
-          style,
-        ]}>
-        <Line
-          p1={vec(0, lineY)}
-          p2={vec(width, lineY)}
-          color={'rgba(0,0,0,0.1)'}
-          style="stroke"
-          strokeWidth={2}>
-          <DashPathEffect intervals={[4, 4]} />
-        </Line>
-        <Path
-          path={rGraphPath}
-          color={Palette.primary}
-          strokeWidth={3}
-          style={'stroke'}
-          strokeCap={'round'}>
-          <CornerPathEffect r={20} />
-        </Path>
-      </Canvas>
+  useEffect(() => {
+    // Animate the line and the gradient
+    animationLine.value = withTiming(1, {duration: 1000});
+    animationGradient.value = withDelay(
+      1000,
+      withTiming({x: 0, y: chartHeight}, {duration: 500}),
     );
-  },
-);
+    selectedValue.value = withTiming(data[data.length -1].price);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    padding: 10,
-    borderRadius: 10,
-    alignItems:"center",
-    justifyContent: "center",
-    backgroundColor: "#BCBCBC",
-    width: "100%",
-    height:"100%"
-  }
-})
+  // x domain
+  const xDomain = data.map((dataPoint: DataType) => dataPoint.date);
 
-export { Graph };
+  // range of the x scale
+  const xRange = [chartMargin, chartWidth - chartMargin];
+
+  // Create the x scale
+  const x = scalePoint().domain(xDomain).range(xRange).padding(0);
+
+  const stepX = x.step();
+
+  // Find the max and min values of the data
+  const max = Math.max(...data.map(val => val.price));
+  const min = Math.min(...data.map(val => val.price));
+  // y domain
+  const yDomain = [min, max];
+
+  // range of the y scale
+  const yRange = [chartHeight, 0];
+
+  // Create the y scale
+  const y = scaleLinear().domain(yDomain).range(yRange);
+
+  // Create the curved line
+  const curvedLine = line<DataType>()
+    .x(d => x(d.date)!)
+    .y(d => y(d.price))
+    .curve(curveBasis)(data);
+
+  const linePath = Skia.Path.MakeFromSVGString(curvedLine!);
+
+  // Parse the path to get the points
+  const path = parse(linePath!.toSVGString());
+
+  // handle the gesture event
+  const handleGestureEvent = (e: PanGestureHandlerEventPayload) => {
+    'worklet';
+
+    const index = Math.floor(e.absoluteX / stepX);
+    // runOnJS(setSelectedDate)(data[index].date);
+    selectedValue.value = withTiming(data[index].price);
+    const clampValue = clamp(
+      Math.floor(e.absoluteX / stepX) * stepX + chartMargin,
+      chartMargin,
+      chartWidth - chartMargin,
+    );
+
+    cx.value = clampValue;
+    // for some device getYForX returns null for the last point
+    // so we need to floor the value
+    cy.value = getYForX(path, Math.floor(clampValue))!;
+  };
+
+  // Pan gesture handler
+  const pan = Gesture.Pan()
+    .onTouchesDown(() => {
+      runOnJS(setShowCursor)(true);
+    })
+    .onTouchesUp(() => {
+      runOnJS(setShowCursor)(false);
+      selectedValue.value = withTiming(data[data.length -1].price);
+      runOnJS(setSelectedDate)('Total');
+    })
+    .onBegin(handleGestureEvent)
+    .onChange(handleGestureEvent);
+
+  return (
+    <GestureDetector gesture={pan}>
+      <Canvas
+        style={{
+          width: chartWidth,
+          height: chartHeight,
+        }}>
+        <Path
+          style="stroke"
+          path={linePath!}
+          strokeWidth={4}
+          color="#008FE7"
+          end={animationLine}
+          start={0}
+          strokeCap={'round'}
+        />
+        <Gradient
+          chartHeight={chartHeight}
+          chartWidth={chartWidth}
+          chartMargin={chartMargin}
+          animationGradient={animationGradient}
+          curvedLine={curvedLine!}
+        />
+        {/*
+        data.map((dataPoint: DataType, index) => (
+          <XAxisText
+            x={x(dataPoint.label)!}
+            y={chartHeight}
+            text={dataPoint.label}
+            key={index}
+          />
+        ))}
+        {showCursor && <Cursor cx={cx} cy={cy} chartHeight={chartHeight} />
+        */}
+      </Canvas>
+    </GestureDetector>
+  );
+};
+
+export default LineChart;

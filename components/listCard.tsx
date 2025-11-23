@@ -2,18 +2,13 @@ import { useRouter } from 'expo-router';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import * as Haptics from 'expo-haptics';
 
-interface Price {
-  item_id: string,
-  price: number,
-  date: Date
-}
-
 type ListCard = {
     uuid: string,
     image: string,
     title: string,
     link: string,
     source: string,
+    brand: string
 }
 
 export default function ListCard(
@@ -22,26 +17,28 @@ export default function ListCard(
         image,
         title,
         link,
-        source
-    }: ListCard
-) {
+        source,
+        brand
+    } : ListCard
+) { 
     const router = useRouter();
 
     return (
         <TouchableOpacity 
             onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                router.push({
-                    pathname: '/item',
-                    params: { 
-                        uuid, 
-                        title,
-                        image,
-                        price: 0,
-                        source,
-                        link
+                router.push(
+                    {
+                        pathname: '/item',
+                        params: {
+                            uuid, 
+                            title,
+                            image,
+                            source,
+                            link
+                        }
                     }
-                })
+                )
             }}
             style={styles.view}>
             <Image
@@ -55,10 +52,31 @@ export default function ListCard(
                     style={{
                         width: 200,
                         fontSize: 36,
-                        color: "black"
+                        color: "black",
+                        fontFamily: "heavy"
                     }}
                     numberOfLines={1}
                     ellipsizeMode={"tail"}>{title}
+                </Text>
+                <Text  
+                    style={{
+                        width: 200,
+                        fontSize: 18,
+                        color: "#747474",
+                        fontFamily: "bold"
+                    }}
+                    numberOfLines={1}
+                    ellipsizeMode={"tail"}>{brand}
+                </Text>
+                <Text  
+                    style={{
+                        width: 200,
+                        fontSize: 36,
+                        color: "#008FE7",
+                        fontFamily: "heavy"
+                    }}
+                    numberOfLines={1}
+                    ellipsizeMode={"tail"}>R 0.00
                 </Text>
              </View>
         </TouchableOpacity>

@@ -1,7 +1,5 @@
 import { height } from "@/constants/dimensions"
-import { useSearch } from "@/store/search"
-import React, { Component } from "react"
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 
 
 export function EmptyState({
@@ -11,24 +9,10 @@ export function EmptyState({
   title?: string
   message?: string
 }) {
-    const { loading } = useSearch()
-
-
-
     return (
         <View style={styles.component}>
-        {
-            loading?
-                <>
-                    <ActivityIndicator/>
-                </>
-            :
-            <>
-                <Text style={styles.header}>{title}</Text>
-                <Text style={styles.text}>{message}</Text>
-            </>
-        }
-            
+            <Text style={styles.header}>{title}</Text>
+            <Text style={styles.text}>{message}</Text>    
         </View>
     )
 }
@@ -36,21 +20,21 @@ export function EmptyState({
 const styles = StyleSheet.create({
     component: {
         padding: 10,
-        marginHorizontal: 20,
-        height: height - 200,
+        marginHorizontal: 20,    height: height - 200,
         paddingTop: 80,
         display: "flex",
         flexDirection: "column",
         alignItems: "center"
     },
     header: {
-        fontSize: 20,
-        fontWeight: "bold",
+        fontSize: 41,
+        fontFamily: "heavy",
         paddingBottom: 100,
     },
     text: {
         fontSize: 30,
         textAlign: "center",
-        alignSelf: "center"
+        alignSelf: "center",
+        fontFamily: "regular",
     }
 })

@@ -1,56 +1,84 @@
 import {useState } from 'react';
-import { StyleSheet, View, TextInput, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TextInput, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { useSearch } from '@/store/search';
+import { drizzle } from 'drizzle-orm/expo-sqlite';
+import { useSQLiteContext } from 'expo-sqlite';
+import * as schema from "@/schema";
+import { useChannel } from 'ably/react';
+import { useAbly } from "ably/react";
+import { useRouter } from 'expo-router';
+import * as Clipboard from 'expo-clipboard';
 
 export default function SearchInput() {
-    const { setSearch, setItems, setPagination, setLoading, clearSearch, page, limit, setToast } = useSearch();
-    const [ searchText, setsearchText ] = useState("");
+    const router = useRouter();
+    const client = useAbly();
+    const clientId = client.auth.clientId;
     
+    const { publish } = useChannel("items", (data) => {
+    });
+
+    useChannel(`private:${clientId}`, (response) => {
+        const { data } = response;
+        router.navigate({
+            pathname: "/add",
+            params: { 
+                uuid: data.uuid,
+                title: data.title,
+                image: data.image,
+                price: data.current_price,
+                source: data.source_name,
+                link: data.link,
+                brand: data.brand
+            }
+        })
+        setLoading(false)
+    });
+
+    const { setSearch, search:SearchText, loading, setItems, setPagination, setLoading, clearSearch, page, limit, setToast } = useSearch();
+    const db = useSQLiteContext();
+    const drizzleDb = drizzle(db, {schema});
+        
     const search = async() => {
+
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
         setLoading(true);
 
-        if (searchText === ""){ 
+        if (SearchText === ""){ 
+            const text = await Clipboard.getStringAsync();
+            setSearch(text)
             setLoading(false);
-            setToast()
             return;
         }
-        clearSearch()
-        setSearch(searchText)
+        
         try {
-            const response = await fetch(`${process.env.EXPO_PUBLIC_API}/search?search=${searchText}&page=${page}&limit=${limit}`);
-            const data = await response.json();
-            const { items, hasNext } = data;
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
-            if (items == null){
-                clearSearch()
-                return;
-            } 
-            setToast()
-            setItems(items)
-            setPagination({
-                page, 
-                hasNext
-            })
-        }catch (error){
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error)
-            clearSearch()
-            setToast()
-        }finally{
+            new URL(SearchText);
+            searchLink(SearchText)
+        } catch (e) {
             setLoading(false);
-        }
+        }      
     };
+
+
+    const searchLink = async(link: string) => {
+        setLoading(true)
+
+        publish("items", link).catch(error => {
+            console.log(error)
+            setLoading(false)
+        })
+    }
 
     return (
         <View style={styles.view}>
             <TextInput
                 testID={"search-input"}
                 style={styles.textInput}
-                placeholder='Search any item'
+                value={SearchText}
+                placeholder='Paste link'
                 onChangeText={(text) => {
                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-                    setsearchText(text)
+                    setSearch(text)
                 }}
             />
             <TouchableOpacity
@@ -58,7 +86,12 @@ export default function SearchInput() {
                 style={styles.button}
                 onPress={search}
             >
-                <Text style={styles.text}>SEARCH</Text>
+                {
+                    loading?
+                        <ActivityIndicator />
+                    :
+                        <Text style={styles.text}>{SearchText==""? "PASTE LINK": "SEARCH LINK"}</Text>
+                }
             </TouchableOpacity>
         </View>
     );
@@ -75,12 +108,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         marginTop: 80,
         paddingVertical: 10,
-        paddingHorizontal: 2,
+        paddingHorizontal: 5,
         marginBottom: 20,
         alignSelf: "center",
-        height: 50,
         borderWidth: 2,
-        borderColor: "blue"
+        borderColor: "#008FE7"
         
     },
     textInput:{
@@ -90,9 +122,9 @@ const styles = StyleSheet.create({
         fontSize: 21
     },
     button:{
-        backgroundColor: "blue",
+        backgroundColor: "#008FE7",
         height: 40,
-        width: 80,
+        width: 100,
         borderRadius: 10,
         display: "flex",
         alignItems: "center",
@@ -100,6 +132,6 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "white",
-        fontWeight: "bold"
+        fontFamily: "bold"
     }
 });

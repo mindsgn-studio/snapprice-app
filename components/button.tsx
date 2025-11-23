@@ -1,5 +1,4 @@
-import { useRouter } from 'expo-router';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { StyleSheet,  Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { width } from '../constants/dimensions';
 
 type Button = {
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
     container: {
         width: width - 20,
         height: 40,
-        backgroundColor: "blue",
+        backgroundColor: "#008FE7",
         alignSelf: "center",
         display: "flex",
         justifyContent: "center",
@@ -53,11 +52,11 @@ const styles = StyleSheet.create({
     },
     outline: {
         backgroundColor: "none",
-        borderColor: "blue",
+        borderColor: "#FF5050",
         borderRadius: 5,
     },
     outlineText: {
-        color: "blue"
+        color: "#FF5050"
     },
     text: {
         alignSelf: "center",

@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD `first_time` text DEFAULT 'true';

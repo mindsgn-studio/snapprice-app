@@ -8,6 +8,17 @@ import m0003 from './0003_previous_hiroim.sql';
 import m0004 from './0004_illegal_stardust.sql';
 import m0005 from './0005_sudden_gwen_stacy.sql';
 import m0006 from './0006_woozy_kulan_gath.sql';
+import m0007 from './0007_uneven_alice.sql';
+import m0008 from './0008_outstanding_skreet.sql';
+import m0009 from './0009_same_blackheart.sql';
+import m0010 from './0010_rainy_gauntlet.sql';
+import m0011 from './0011_lethal_wither.sql';
+import m0012 from './0012_early_archangel.sql';
+import m0013 from './0013_material_skaar.sql';
+import m0014 from './0014_broad_charles_xavier.sql';
+import m0015 from './0015_harsh_komodo.sql';
+import m0016 from './0016_magenta_lifeguard.sql';
+import m0017 from './0017_spotty_rafael_vega.sql';
 
   export default {
     journal,
@@ -18,7 +29,18 @@ m0002,
 m0003,
 m0004,
 m0005,
-m0006
+m0006,
+m0007,
+m0008,
+m0009,
+m0010,
+m0011,
+m0012,
+m0013,
+m0014,
+m0015,
+m0016,
+m0017
     }
   }
   

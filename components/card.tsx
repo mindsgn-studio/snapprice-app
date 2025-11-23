@@ -39,7 +39,7 @@ export default function ItemCard(
                         uuid, 
                         title,
                         image,
-                        price: prices[0].price,
+                        price: prices? prices[0].price : [],
                         source,
                         link
                     }
@@ -63,7 +63,7 @@ export default function ItemCard(
                     ellipsizeMode={"tail"}>{title}
                 </Text>
                 <Text style={styles.textPrice}>
-                    R{prices[0].price}
+                    R{prices? prices[0].price : []}
                 </Text>
              </View>
         </TouchableOpacity>

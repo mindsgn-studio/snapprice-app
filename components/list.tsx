@@ -32,7 +32,7 @@ export default function List() {
     const db = useSQLiteContext();
     const drizzleDb = drizzle(db, { schema});
     const { data } = useLiveQuery(drizzleDb.select().from(schema.items))
-    
+
     return (
         <View style={styles.view}>
             <FlashList
@@ -49,9 +49,9 @@ export default function List() {
                             title={item.title}
                             source={item.source}
                             link={item.link}
+                            brand={item.brand}
                         />
-                    )
-                }}
+                    )                }}
                 ListEmptyComponent={
                     <EmptyState 
                         title={"Nothing Here Yet"}

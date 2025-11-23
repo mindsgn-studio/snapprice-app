@@ -7,6 +7,7 @@ import * as schema from '@/schema';
 import SearchInput from '@/components/search';
 import Main from '@/components/main';
 import FooterCard from '@/components/footerCard';
+import List from '@/components/list';
 
 export default function HomeScreen() {
   const db = useSQLiteContext();
@@ -15,8 +16,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <SearchInput />
-      <Main />
-      <FooterCard />
+      <List />
     </View>
   );
 }
