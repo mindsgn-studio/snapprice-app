@@ -9,6 +9,7 @@ import { useChannel } from 'ably/react';
 import { useAbly } from "ably/react";
 import { useRouter } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
+import { eq } from 'drizzle-orm';
 
 export default function SearchInput() {
     const router = useRouter();
@@ -18,29 +19,38 @@ export default function SearchInput() {
     const { publish } = useChannel("items", (data) => {
     });
 
-    useChannel(`private:${clientId}`, (response) => {
+    useChannel(`private:${clientId}`, (response: any) => {
         const { data } = response;
+
+        const {status, detail} = data
+
+        if(status != "ok" || !detail){
+            console.log(response)
+            setLoading(false)
+            return 
+        }
+
         router.navigate({
             pathname: "/add",
             params: { 
-                uuid: data.uuid,
-                title: data.title,
-                image: data.image,
-                price: data.current_price,
-                source: data.source_name,
-                link: data.link,
-                brand: data.brand
+                uuid: detail.uuid,
+                title: detail.title,
+                image: detail.image,
+                price: detail.current_price,
+                source: detail.source_name,
+                link: detail.link,
+                brand: detail.brand
             }
         })
+
         setLoading(false)
     });
 
-    const { setSearch, search:SearchText, loading, setItems, setPagination, setLoading, clearSearch, page, limit, setToast } = useSearch();
+    const { setSearch, search:SearchText, loading, setLoading } = useSearch();
     const db = useSQLiteContext();
     const drizzleDb = drizzle(db, {schema});
         
     const search = async() => {
-
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
         setLoading(true);
 
@@ -63,10 +73,29 @@ export default function SearchInput() {
     const searchLink = async(link: string) => {
         setLoading(true)
 
-        publish("items", link).catch(error => {
+        const items = await drizzleDb.select().from(schema.items).where(eq(schema.items.link, link))
+        
+        if(items.length != 0){
+            const item = items[0]
+            router.push({
+                pathname: "/item",
+                params:{
+                    ...item
+                }
+            })
+            setLoading(false)
+            return
+        }
+
+        try{
+            publish("items", link).catch(error => {
+                console.log(error)
+                setLoading(false)
+            })
+        } catch(error){
             console.log(error)
             setLoading(false)
-        })
+        }
     }
 
     return (
@@ -85,6 +114,7 @@ export default function SearchInput() {
                 testID={"search-button"}
                 style={styles.button}
                 onPress={search}
+                
             >
                 {
                     loading?
@@ -132,6 +162,6 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "white",
-        fontFamily: "bold"
+        fontFamily: "heavy"
     }
 });

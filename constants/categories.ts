@@ -1,32 +1,82 @@
-const types = [
+export const categoryTypes = [
     {
-        name: "grocery"
+        title: "Grocery",
+        description: "Everyday food and drink items",
+        background: "#06BF9A",
+        color: "#E1F7F3",
+        label: "Grocery",
+        value: "grocery",
     },
     {
-        name: "Toiletries"
+        title: "Toiletries",
+        description: "Personal-care essentials",
+        background: "#4285F4",
+        color: "#E8F0FD",
+        label: "Toiletries",
+        value: "toiletries",
     },
     {
-        name: "Household supplies"
+        title: "Household Supplies",
+        description: "Cleaning products, detergents, paper goods",
+        background: "#D93025",
+        color: "#FAE6E5",
+        label: "Household Supplies",
+        value: "household supplies",
     },
     {
-        name: "Clothing"
+        title: "Clothing",
+        description: "Apparel, shoes, bags, jewelry",
+        background: "#F29900",
+        color: "#FDF3E0",
+        label: "Clothing",
+        value: "clothing",
     },
     {   
-        name: "Accessories"
+        title: "Beauty & Skincare",
+        description: "Cosmetics, creams, serums, masks",
+        background: "#7063F2",
+        color: "#EEECFD",
+        label: "Beauty & Skincare",
+        value: "beauty & skincare",
     },
     {   
-        name: "Beauty & Skincare"
+        title: "Pet Supplies",
+        description: "Pet food, treats, litter, grooming products",
+        background: "#FF4065",
+        color: "#FFE3E8",
+        label: "Pet Supplies",
+        value: "pet supplies",
     },
     {   
-        name: "Pet supplies"
+        title: "Stationery",
+        description: "Pens, notebooks, printer paper, cartridges",
+        background: "#06BF9A",
+        color: "#E1F7F3",
+        label: "Stationery",
+        value: "stationery",
     },
     {   
-        name: "Stationery"
+        title: "Electronics",
+        description: "Phones, laptops, headphones, accessories",
+        background: "#4285F4",
+        color: "#E8F0FD",
+        label: "Electronics",
+        value: "electronics",
     },
     {   
-        name: "Electronics"
+        title: "Books/Media",
+        description: "Books, e-books, DVDs, games",
+        background: "#D93025",
+        color: "#FAE6E5",
+        label: "books",
+        value: "books/media",
     },
     {   
-        name: "Books/Media"
+        title: "Wish List",
+        description: "Items you want sometime",
+        background: "#F29900",
+        color: "#FDF3E0",
+        label: "Wish List",
+        value: "wish list",
     }
 ]

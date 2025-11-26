@@ -19,6 +19,14 @@ import m0014 from './0014_broad_charles_xavier.sql';
 import m0015 from './0015_harsh_komodo.sql';
 import m0016 from './0016_magenta_lifeguard.sql';
 import m0017 from './0017_spotty_rafael_vega.sql';
+import m0018 from './0018_damp_chamber.sql';
+import m0019 from './0019_brief_bromley.sql';
+import m0020 from './0020_married_iron_man.sql';
+import m0021 from './0021_damp_quentin_quire.sql';
+import m0022 from './0022_superb_mongu.sql';
+import m0023 from './0023_rich_arachne.sql';
+import m0024 from './0024_dashing_ezekiel_stane.sql';
+import m0025 from './0025_clammy_sleepwalker.sql';
 
   export default {
     journal,
@@ -40,7 +48,15 @@ m0013,
 m0014,
 m0015,
 m0016,
-m0017
+m0017,
+m0018,
+m0019,
+m0020,
+m0021,
+m0022,
+m0023,
+m0024,
+m0025
     }
   }
   

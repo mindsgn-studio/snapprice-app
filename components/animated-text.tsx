@@ -33,7 +33,7 @@ const AnimatedText = ({selectedValue, font}: Props) => {
             <Text
                 text={animatedText}
                 font={font}
-                color={'black'}
+                color={"#008FE7"}
                 x={20}
                 y={fontSize.height + MARGIN_VERTICAL / 2}
             />

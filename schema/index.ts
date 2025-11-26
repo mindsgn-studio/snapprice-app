@@ -8,6 +8,31 @@ export const items = sqliteTable('items', {
     title: text('title').notNull(),
     link: text('link').notNull().unique(),
     source: text('source'),
+    category_id: integer('category_id'),
+    created_at: text("created_at"),
+    updated_at: text("updated_at"),
+});
+
+export const statistics = sqliteTable('statistics', {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    item_uuid: text('uuid').notNull().unique(),
+    current: integer('current'),
+    average: integer('average'),
+    change: integer('change'),
+    highest: integer('highest'),
+    lowest: integer('lowest'),
+    created_at: text("created_at"),
+    updated_at: text("updated_at"),
+});
+
+export const category = sqliteTable('category', {
+    id: integer('id').primaryKey({ autoIncrement: true }),
+    title: text('title').notNull().unique(),
+    description: text('description'),
+    background: text('background'),
+    color: text('color'),
+    label: text('label').unique(),
+    value:  text('value').unique(),
     created_at: text("created_at"),
     updated_at: text("updated_at"),
 });
@@ -16,6 +41,8 @@ export const images = sqliteTable('images', {
     id: integer('id').primaryKey({ autoIncrement: true }),
     uuid: text('uuid').notNull(),
     image: text('image').notNull(),
+    created_at: text("created_at"),
+    updated_at: text("updated_at"),
 });
 
 export const prices = sqliteTable('prices', {
@@ -32,9 +59,11 @@ export const user = sqliteTable('user', {
     onboarded: text("onboarded").default("false"),
     version: text("version"),
     created_at: text("created_at"),
+    updated_at: text("updated_at"),
 });
 
 export type Items = typeof items.$inferSelect;
+export type Category = typeof category.$inferSelect;
 export type Prices = typeof prices.$inferSelect;
 export type User = typeof user.$inferSelect;
 export type Images = typeof images.$inferSelect;

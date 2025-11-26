@@ -25,11 +25,7 @@ TaskManager.defineTask(BACKGROUND_TASK_IDENTIFIER, async () => {
 
 export const startBackgroundTask = async () => {
   try {
-    await BackgroundTask.registerTaskAsync(BACKGROUND_TASK_IDENTIFIER, 
-      {
-        minimumInterval: 60 * 15,
-      }
-    );
+    await BackgroundTask.registerTaskAsync(BACKGROUND_TASK_IDENTIFIER, );
     console.log("Background task registered!");
   } catch (error) {
     console.log("Failed to register background task:", error);

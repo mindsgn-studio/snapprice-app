@@ -7,22 +7,25 @@ type Button = {
     outline?: boolean,
     loading?: boolean,
     type?: "normal",
-    testID: string
+    testID: string,
+    disabled: boolean
 }
 
 export default function Button(
     {
         title,
         onPress,
-        outline = false,
-        loading = false,
-        type = "normal",
-        testID="button"
+        outline=false,
+        loading=false,
+        type="normal",
+        testID="button",
+        disabled=false
     }: Button
 ) {
     return (
         <TouchableOpacity 
             testID={testID}
+            disabled={disabled}
             onPress={onPress}
             style={[
                 styles.container, 

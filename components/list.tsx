@@ -6,7 +6,7 @@ import { EmptyState } from './empty';
 import { useSQLiteContext } from 'expo-sqlite';
 import { drizzle } from 'drizzle-orm/expo-sqlite';
 import { useLiveQuery } from 'drizzle-orm/expo-sqlite';
-import * as schema from "@/schema"
+import * as schema from "@/schema";
 
 interface Price {
   item_id: string,
@@ -32,7 +32,7 @@ export default function List() {
     const db = useSQLiteContext();
     const drizzleDb = drizzle(db, { schema});
     const { data } = useLiveQuery(drizzleDb.select().from(schema.items))
-
+    
     return (
         <View style={styles.view}>
             <FlashList
@@ -61,6 +61,7 @@ export default function List() {
                 contentContainerStyle={{ paddingBottom: 40 }}
                 onEndReachedThreshold={0.5}
             />
+            
         </View>
     );
 }
