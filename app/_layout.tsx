@@ -11,7 +11,9 @@ import migrations from '@/drizzle/migrations';
 import { AblyProvider, ChannelProvider } from 'ably/react';
 import * as Ably from "ably";
 import * as Crypto from "expo-crypto";
-import { startBackgroundTask } from '@/lib/utils';
+import { startBackgroundTask, stopBackgroundTask } from '@/lib/utils';
+import { AppState } from "react-native";
+import * as BackgroundTask from 'expo-background-task';
 
 export const DATABASE_NAME = 'snapprice';
 const clientId = Crypto.randomUUID();
@@ -27,7 +29,18 @@ export default function RootLayout() {
   useMigrations(db, migrations);
 
   useEffect(() => {
-    startBackgroundTask();
+    const subscription = AppState.addEventListener("change", (nextState) => {
+      if (nextState === "background") {
+        console.log("➡️ App moved to BACKGROUND");
+        BackgroundTask.triggerTaskWorkerForTestingAsync();
+      }
+
+      if (nextState === "active") {
+        console.log("⬅️ App moved to FOREGROUND");
+      }
+    });
+
+    return () => subscription.remove();
   }, []);
   
   return (

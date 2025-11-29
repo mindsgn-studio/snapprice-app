@@ -15,11 +15,12 @@ export const items = sqliteTable('items', {
 
 export const statistics = sqliteTable('statistics', {
     id: integer('id').primaryKey({ autoIncrement: true }),
-    item_uuid: text('uuid').notNull().unique(),
+    item_uuid: text('item_uuid').notNull().unique(),
     current: integer('current'),
     average: integer('average'),
     change: integer('change'),
     highest: integer('highest'),
+    previous: integer('previous').default(0),
     lowest: integer('lowest'),
     created_at: text("created_at"),
     updated_at: text("updated_at"),
@@ -39,7 +40,7 @@ export const category = sqliteTable('category', {
 
 export const images = sqliteTable('images', {
     id: integer('id').primaryKey({ autoIncrement: true }),
-    uuid: text('uuid').notNull(),
+    item_uuid: text('item_uuid').notNull().unique(),
     image: text('image').notNull(),
     created_at: text("created_at"),
     updated_at: text("updated_at"),
@@ -47,7 +48,7 @@ export const images = sqliteTable('images', {
 
 export const prices = sqliteTable('prices', {
     id: integer('id').primaryKey({ autoIncrement: true }),
-    uuid: text('uuid').notNull(),
+    item_uuid: text('item_uuid').notNull().unique(),
     price: integer('price').notNull(),
     date: text('date').notNull().unique(),
 });
@@ -55,7 +56,7 @@ export const prices = sqliteTable('prices', {
 export const user = sqliteTable('user', {
     id: integer('id').primaryKey({ autoIncrement: true }),
     uuid: text('uuid'),
-    first_time: text("first_time").default("false"),
+    first_time: text("first_time").default(""),
     onboarded: text("onboarded").default("false"),
     version: text("version"),
     created_at: text("created_at"),

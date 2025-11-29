@@ -14,9 +14,9 @@ export default function HomeScreen() {
   
   return (
     <View style={styles.container}>
+      <Toast />
       <SearchInput />
       <List />
-      <Toast />
     </View>
   );
 }

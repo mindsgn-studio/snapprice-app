@@ -143,6 +143,7 @@ export default function Details(
             const response = await fetch(url, {
                 method: "POST"
             });
+
             const data = await response.json();
             const {added} = data;
             
@@ -169,24 +170,25 @@ export default function Details(
                     current: price,
                     average: price,
                     change: 0,
+                    previous: price,
                     highest: price,
                     lowest: price,
                     created_at: nowDate,
                     updated_at: nowDate,
                 });
-            }   
 
-            router.replace({
-                pathname: "/item", 
-                params:{
-                    uuid,
-                    image,
-                    title,
-                    link,
-                    source,
-                    brand,
-                }
-            })
+                router.replace({
+                    pathname: "/item", 
+                    params: {
+                        uuid,
+                        image,
+                        title,
+                        link,
+                        source,
+                        brand,
+                    }
+                })
+            }
         } catch (error) {
            console.log(error)
         } finally {

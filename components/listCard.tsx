@@ -32,7 +32,7 @@ export default function ListCard(
     const db = useSQLiteContext();
     const drizzleDb = drizzle(db, { schema });
     const { data } = useLiveQuery(drizzleDb.select().from(schema.statistics).where(eq(schema.statistics.item_uuid, uuid)).limit(1))
-    
+
      useEffect(() => {
         if(data && data.length!=0){
             //@ts-expect-error type

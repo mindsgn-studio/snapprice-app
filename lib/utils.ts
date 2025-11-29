@@ -12,9 +12,9 @@ TaskManager.defineTask(BACKGROUND_TASK_IDENTIFIER, async () => {
   try {
     const items = db.getAllSync("SELECT * FROM items;");
     
-    items.map((item: any) => {
-      console.log(item);
-    });
+    for (const item in items){
+      await fetch(`http://localhost:8080/ping/${item.uuid}`)
+    }
     
     return BackgroundTask.BackgroundTaskResult.Success; 
   } catch (error) {
@@ -25,7 +25,9 @@ TaskManager.defineTask(BACKGROUND_TASK_IDENTIFIER, async () => {
 
 export const startBackgroundTask = async () => {
   try {
-    await BackgroundTask.registerTaskAsync(BACKGROUND_TASK_IDENTIFIER, );
+    await BackgroundTask.registerTaskAsync(BACKGROUND_TASK_IDENTIFIER, {
+      minimumInterval: 15 * 60,
+    });
     console.log("Background task registered!");
   } catch (error) {
     console.log("Failed to register background task:", error);

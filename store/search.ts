@@ -35,8 +35,6 @@ interface SearchInterface {
   setItems: (search: [Item]) => void,
   setSearch: (text: string) => void,
   clearSearch: () => void,
-  showToast: boolean,
-  setToast: () => void
 }
 
 const useSearch = create<SearchInterface>((set, get) => ({
@@ -46,24 +44,12 @@ const useSearch = create<SearchInterface>((set, get) => ({
   page: 1,
   hasNext: false,
   limit: 10,
-  showToast: false,
   toast: {
     message: "",
     title: "",
     show: false
   },
   message:"Something went wrong, please try again later.",
-  setToast: () => {
-    set({
-      showToast: true
-    })
-
-    setTimeout(() => {
-      set({
-        showToast: false
-      })
-    }, 3000)
-  },
   setLoading: (loading: boolean) => {
     set({ loading: loading })
   },

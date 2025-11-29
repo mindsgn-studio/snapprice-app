@@ -1,4 +1,3 @@
-import {useState } from 'react';
 import { StyleSheet, View, TextInput, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { useSearch } from '@/store/search';
@@ -10,24 +9,28 @@ import { useAbly } from "ably/react";
 import { useRouter } from 'expo-router';
 import * as Clipboard from 'expo-clipboard';
 import { eq } from 'drizzle-orm';
+import { useToast } from '@/store/toast';
 
 export default function SearchInput() {
+    const {setToast} = useToast()
     const router = useRouter();
     const client = useAbly();
     const clientId = client.auth.clientId;
     
-    const { publish } = useChannel("items", (data) => {
-    });
+    const { publish } = useChannel("items", (data) => {});
 
     useChannel(`private:${clientId}`, (response: any) => {
         const { data } = response;
+        const { status, detail } = data;
 
-        const {status, detail} = data
-
-        if(status != "ok" || !detail){
-            console.log(response)
-            setLoading(false)
-            return 
+        if (status !== "ok" || !detail) {
+            console.log(response);
+            setToast({
+                title: "Error fetching item",
+                message: "Unable to retrieve item details. Please try again."
+            });
+            setLoading(false);
+            return;
         }
 
         router.navigate({
@@ -41,62 +44,96 @@ export default function SearchInput() {
                 link: detail.link,
                 brand: detail.brand
             }
-        })
+        });
 
-        setLoading(false)
+        setLoading(false);
     });
 
     const { setSearch, search:SearchText, loading, setLoading } = useSearch();
     const db = useSQLiteContext();
     const drizzleDb = drizzle(db, {schema});
+    
         
     const search = async() => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
         setLoading(true);
 
         if (SearchText === ""){ 
-            const text = await Clipboard.getStringAsync();
-            setSearch(text)
-            setLoading(false);
-            return;
+            try {
+                const text = await Clipboard.getStringAsync();
+                if (text == null) throw Error();
+                
+                setSearch(text);
+                setLoading(false);
+
+            } catch(error) {
+                console.log(error)
+                setToast({
+                    title: "No Link Found",
+                    message: "Clipboard does not contain a valid link."
+                });
+            } finally {
+                setLoading(false);
+                return;
+            }
         }
         
         try {
-            new URL(SearchText);
-            searchLink(SearchText)
+            const parsed = new URL(SearchText);
+
+            if (!parsed.hostname.includes("takealot.com")) {
+                throw new Error("not takealot link");
+            }
+
+            if (/PLID\d+/i.test(parsed.pathname) == false) {
+                throw new Error("not takealot link");
+            }
+
+            searchLink(SearchText);
+
         } catch (e) {
+            setToast({
+                title: "Invalid Link",
+                message: "Please paste a valid Takealot product link."
+            });
             setLoading(false);
-        }      
+        }
     };
 
-
     const searchLink = async(link: string) => {
-        setLoading(true)
+        setLoading(true);
 
-        const items = await drizzleDb.select().from(schema.items).where(eq(schema.items.link, link))
+        const items = await drizzleDb.select().from(schema.items).where(eq(schema.items.link, link));
         
-        if(items.length != 0){
-            const item = items[0]
+        if (items.length != 0) {
+            const item = items[0];
             router.push({
                 pathname: "/item",
-                params:{
-                    ...item
-                }
-            })
-            setLoading(false)
-            return
+                params: { ...item }
+            });
+            setLoading(false);
+            return;
         }
 
-        try{
+        try {
             publish("items", link).catch(error => {
-                console.log(error)
-                setLoading(false)
-            })
-        } catch(error){
-            console.log(error)
-            setLoading(false)
+                console.log(error);
+                setToast({
+                    title: "Network Error",
+                    message: "Unable to send request. Please try again."
+                });
+                setLoading(false);
+            });
+
+        } catch(error) {
+            console.log(error);
+            setToast({
+                title: "Unexpected Error",
+                message: "Something went wrong while searching. Please try again."
+            });
+            setLoading(false);
         }
-    }
+    };
 
     return (
         <View style={styles.view}>
@@ -106,20 +143,18 @@ export default function SearchInput() {
                 value={SearchText}
                 placeholder='Paste link'
                 onChangeText={(text) => {
-                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)
-                    setSearch(text)
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setSearch(text);
                 }}
             />
             <TouchableOpacity
                 testID={"search-button"}
                 style={styles.button}
                 onPress={search}
-                
             >
                 {
-                    loading?
-                        <ActivityIndicator />
-                    :
+                    loading ?
+                        <ActivityIndicator /> :
                         <Text style={styles.text}>{SearchText==""? "PASTE LINK": "SEARCH LINK"}</Text>
                 }
             </TouchableOpacity>

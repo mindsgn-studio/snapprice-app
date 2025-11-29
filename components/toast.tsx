@@ -1,12 +1,11 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
-import { useSearch } from '@/store/search';
+import { useToast } from '@/store/toast';
 
 const Toast = () => {
-    const { toast } = useSearch()
-    const { message, title="error", show } = toast;
-    const positionY = useSharedValue(-100);
+    const { show, title, message } = useToast()
+    const positionY = useSharedValue(100);
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
@@ -26,12 +25,11 @@ const Toast = () => {
         <Animated.View
             style={[
                 styles.commonToastStyle,
-                styles.topToastStyle,
                 animatedStyle,
             ]}
         >
-            <Text >{title}</Text>
-            <Text >{message}</Text>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.message}>{message}</Text>
         </Animated.View>
     );
 };
@@ -54,16 +52,18 @@ const styles = StyleSheet.create({
         right: 0,
         left: 0,
         zIndex: 100,
-        backgroundColor: '#FFCCCB',
+        backgroundColor: '#FAE6E5',
     },
-    topToastStyle: {
-        backgroundColor: '#FFCCCB',
-        top: 0,
+    title:{
+        fontFamily: "bold",
+        fontSize: 28,
+        color: "#D93025",
     },
-    bottomToastStyle: {
-        backgroundColor: '#FFCCCB',
-        bottom: 0,
-    },
+    message:{
+        fontFamily: "meduim",
+        fontSize: 16,
+        color: "#D93025"
+    }
 }); 
 
 

@@ -14,6 +14,7 @@ import { eq } from 'drizzle-orm';
 import { useRouter } from 'expo-router';
 import InfoCard from '@/components/infoCard';
 import AnimatedText from '@/components/animated-text';
+import { sql } from 'drizzle-orm';
 
 export type DataType = {
   item_id: string;
@@ -46,6 +47,43 @@ export default function ItemScreen() {
     lowest: 0,
   }) ;
 
+  const fetchData = async () => {
+    try {
+      const res = await fetch(`${process.env.EXPO_PUBLIC_API}/item/${uuid}`);
+      const json = await res.json();
+      const {average, change, current, highest, lowest, previous, pricesHistory} = json
+      
+      if(average === null || change === null || current === null || highest === null || lowest === null || previous === null){
+        return null
+      }
+
+      await drizzleDb.update(schema.statistics).set({
+        average,
+        change,
+        current,
+        previous,
+        highest,
+        lowest,
+      }).where(eq(schema.statistics.item_uuid, uuid))
+    
+      for (const price in pricesHistory){
+        try{
+          await drizzleDb
+                .insert(schema.prices)
+                .values({
+                  date: pricesHistory[price].date,
+                  price: pricesHistory[price].price,
+                  item_uuid: pricesHistory[price].item_uuid,
+                }).onConflictDoNothing();
+        }catch(error){
+          console.log("error", error)
+        }
+      }
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
+  };
+
   const removeProduct = async() => {
     const userData  = await drizzleDb.select().from(schema.user)
     setLoading(true)
@@ -57,8 +95,9 @@ export default function ItemScreen() {
           await response.json();
           
           await drizzleDb.delete(schema.items).where(eq(schema.items.uuid, uuid));
-          await drizzleDb.delete(schema.prices).where(eq(schema.prices.uuid, uuid));
+          await drizzleDb.delete(schema.prices).where(eq(schema.prices.item_uuid, uuid));
           await drizzleDb.delete(schema.statistics).where(eq(schema.statistics.item_uuid, uuid));
+          await drizzleDb.delete(schema.images).where(eq(schema.images.item_uuid, uuid));
 
           router.back()
       } catch (error){
@@ -94,6 +133,12 @@ export default function ItemScreen() {
   useEffect(() => {
     getDetails()
   },[])
+
+  useEffect(() => {
+    fetchData();
+    const interval = setInterval(fetchData, 60000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <ScrollView style={styles.container}>
