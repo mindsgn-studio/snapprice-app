@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "385551711211",
+    "project_id": "snap-price",
+    "storage_bucket": "snap-price.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385551711211:android:7e46e8c9dd2d574fd7f7ae",
+        "android_client_info": {
+          "package_name": "mindsgn.studio.snap.price"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXxs3dMLzHQz_DO5PziBLKh0e26OFN2o4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
