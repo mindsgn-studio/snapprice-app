@@ -1,0 +1,21 @@
+appId: mindsgn.studio.snap-price
+---
+- launchApp
+- startRecording: 
+    path: 'flow'
+    label: 'user flow'
+    optional: true
+- tapOn:
+    id: "search-input"
+- inputText: "https://www.takealot.com/pepsi-zero-sugar-pet-6-x-2lt/PLID72547257"
+- tapOn:
+    id: "search-button"
+- assertVisible:
+    id: "select-category"
+- tapOn:
+    id: "select-category"
+- tapOn:
+    text: "Grocery"
+- tapOn:
+    id: "add-button"
+- stopRecording

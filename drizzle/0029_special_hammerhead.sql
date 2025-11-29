@@ -1,0 +1,1 @@
+ALTER TABLE `statistics` ADD `previous` integer DEFAULT 0;

@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD `uuid` text NOT NULL;

@@ -1,0 +1,1 @@
+ALTER TABLE `items` ADD `price` integer DEFAULT 0;
